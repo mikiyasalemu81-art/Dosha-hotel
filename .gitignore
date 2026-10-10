@@ -1,0 +1,10 @@
+@"
+node_modules
+.next
+out
+.env
+.env*.local
+.DS_Store
+*.log
+.vercel
+"@ | Out-File -Encoding utf8 .gitignore

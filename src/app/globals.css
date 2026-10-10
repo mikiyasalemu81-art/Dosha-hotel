@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0B0B0C;
+  --charcoal: #151517;
+  --graphite: #232326;
+  --ivory: #F7F2E9;
+  --sand: #D9CDB8;
+  --gold: #C9A24B;
+  --gold-light: #E6C979;
+  --gold-deep: #9C7A2E;
+  --gold-gradient: linear-gradient(135deg, #E6C979 0%, #C9A24B 55%, #9C7A2E 100%);
+  --gold-gradient-hover: linear-gradient(135deg, #F3DE9E 0%, #DBB75F 55%, #B38E37 100%);
+  --gold-glow: rgba(201, 162, 75, 0.25);
+
+  --font-cormorant: 'Cormorant Garamond', 'Noto Serif Ethiopic', Georgia, serif;
+  --font-inter: 'Inter', 'Noto Sans Ethiopic', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-noto-serif-ethiopic: 'Noto Serif Ethiopic', serif;
+  --font-noto-sans-ethiopic: 'Noto Sans Ethiopic', sans-serif;
+}
+
+html {
+  background-color: var(--ink);
+  color: var(--ivory);
+  font-family: var(--font-inter);
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ethiopic Typography Safety: Ensure glyphs are never clipped */
+html[lang='am'],
+html[lang='om'] {
+  font-family: var(--font-noto-sans-ethiopic), var(--font-inter), sans-serif;
+  line-height: 1.7;
+}
+
+html[lang='am'] h1,
+html[lang='am'] h2,
+html[lang='am'] h3,
+html[lang='am'] h4,
+html[lang='om'] h1,
+html[lang='om'] h2,
+html[lang='om'] h3,
+html[lang='om'] h4 {
+  font-family: var(--font-noto-serif-ethiopic), var(--font-cormorant), serif;
+  line-height: 1.45;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+/* Subtle Film Grain Texture Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Selection */
+::selection {
+  background: rgba(201, 162, 75, 0.35);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232326;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 162, 75, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a40;
+}
+
+/* Focus Visible Gold Rings */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Luxury Gold Button Styling with Diagonal Light Sweep */
+.btn-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-gradient);
+  color: #0B0B0C;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1.75rem;
+  min-height: 48px;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(201, 162, 75, 0.22);
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn-gold:hover {
+  background: var(--gold-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 162, 75, 0.35);
+}
+
+.btn-gold:hover::after {
+  transform: translateX(350%) rotate(25deg);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button: Transparent with fine 1px gold/ivory border */
+.btn-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(21, 21, 23, 0.4);
+  backdrop-filter: blur(8px);
+  color: var(--ivory);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1.75rem;
+  min-height: 48px;
+  border-radius: 2px;
+  border: 1px solid rgba(247, 242, 233, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(35, 35, 38, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Eyebrow Label */
+.eyebrow-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eyebrow-label::before {
+  content: '';
+  display: inline-block;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(21, 21, 23, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 162, 75, 0.15);
+}
+
+.glass-panel-light {
+  background: rgba(35, 35, 38, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(247, 242, 233, 0.08);
+}
+
+/* Subtle Vignette on images */
+.image-vignette {
+  position: relative;
+}
+
+.image-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 60%,
+    rgba(11, 11, 12, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Gold Underline Animation for Links */
+.link-gold-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-gold-underline:hover::after {
+  width: 100%;
+}
+
+/* Smooth Lenis styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Reduced motion preference fallback */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

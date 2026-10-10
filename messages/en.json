@@ -1,0 +1,235 @@
+{
+  "common": {
+    "hotelName": "Dosha Hotel Adama",
+    "bookNow": "Book Now",
+    "callUs": "Call Us",
+    "whatsappUs": "WhatsApp Us",
+    "getDirections": "Get Directions",
+    "checkAvailability": "Check Availability",
+    "viewOnGoogleMaps": "Read all reviews on Google Maps",
+    "bookOnBookingCom": "Book on Booking.com",
+    "night": "night",
+    "from": "From",
+    "nights": "nights",
+    "priceOnRequest": "Price on Request",
+    "close": "Close",
+    "back": "Back",
+    "continue": "Continue",
+    "scroll": "Scroll to explore",
+    "pauseSlideshow": "Pause slideshow",
+    "playSlideshow": "Resume slideshow"
+  },
+  "nav": {
+    "rooms": "Rooms",
+    "restaurant": "Restaurant & Bar",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "location": "Location",
+    "book": "Book Stay",
+    "menu": "Menu"
+  },
+  "hero": {
+    "headline": "Where Adama's warmth meets quiet luxury.",
+    "subheadline": "Adama, Ethiopia · Refined hospitality along the Wonji corridor",
+    "bookCta": "Book Now",
+    "callCta": "Call Us"
+  },
+  "quickBook": {
+    "title": "Plan Your Stay",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "guestOption1": "1 Guest",
+    "guestOption2": "2 Guests",
+    "guestOption3": "3 Guests",
+    "guestOption4": "4+ Guests",
+    "cta": "Check Availability"
+  },
+  "about": {
+    "eyebrow": "WELCOME TO DOSHA",
+    "headline": "A refined sanctuary in the heart of Adama.",
+    "sentence": "Experience generous Ethiopian hospitality balanced with serene architectural elegance and restorative quiet.",
+    "features": {
+      "location": {
+        "title": "Prime Location",
+        "desc": "Effortless access along the Wonji Mazoria corridor facing Dembela School."
+      },
+      "comfort": {
+        "title": "Serene Comfort",
+        "desc": "Thoughtfully crafted rooms featuring premium bedding and calming ambiances."
+      },
+      "dining": {
+        "title": "Distinguished Dining",
+        "desc": "An expansive restaurant hall, vibrant bar lounge, and open-air evening terrace."
+      }
+    }
+  },
+  "rooms": {
+    "eyebrow": "ACCOMMODATIONS",
+    "headline": "Private Sanctuaries of Calm and Comfort",
+    "sentence": "Every room is tailored for effortless rest with crisp linens, warm lighting, and mindful modern touches.",
+    "bookRoom": "Book this room",
+    "fromRate": "From {price} ETB / night",
+    "priceTbd": "Rate available upon request",
+    "amenities": {
+      "wifi": "High-Speed Wi-Fi",
+      "tv": "Flat-Screen TV",
+      "hotWater": "Reliable Hot Water",
+      "breakfast": "Fresh Breakfast",
+      "balcony": "Private Balcony"
+    },
+    "standardTwin": {
+      "name": "Standard Twin Room",
+      "desc": "Two tailored beds adorned with warm welcomes, ideal for colleagues or friends traveling together."
+    },
+    "deluxeDouble": {
+      "name": "Deluxe Double Room",
+      "desc": "Spacious haven with plush bedding, evening refreshments, and serene city air."
+    },
+    "executiveSuite": {
+      "name": "Executive Suite",
+      "desc": "An elevated retreat with an expansive seating area and thoughtful business-grade quiet."
+    },
+    "familyRoom": {
+      "name": "Family Room",
+      "desc": "Generous proportions and harmonious layout designed for the comfort of the entire family."
+    }
+  },
+  "restaurant": {
+    "eyebrow": "RESTAURANT & LOUNGE",
+    "headline": "A Celebration of Flavors, Sunset & Spirits",
+    "sentence": "From morning macchiatos to evening cocktails under terrace lanterns, savor moments made to linger.",
+    "highlights": [
+      "Authentic Ethiopian favorites & continental dining",
+      "Handcrafted signature drinks & premium bar selections",
+      "Romantic open-air terrace with twilight lantern ambience",
+      "Grand banquet & buffet hall for memorable gatherings"
+    ]
+  },
+  "gallery": {
+    "eyebrow": "HOTEL GALLERY",
+    "headline": "A Glimpse into Dosha",
+    "sentence": "Explore our architecture, soothing rooms, and warm social spaces.",
+    "all": "All Photos",
+    "roomsTab": "Rooms",
+    "diningTab": "Dining & Bar",
+    "spacesTab": "Spaces",
+    "images": {
+      "01": "Dosha Hotel Adama modern exterior facade along the Wonji corridor",
+      "02": "Grand double-height reception lobby welcoming guests to Dosha Hotel",
+      "03": "Inviting twin room styled with fresh rose petals and crisp linens",
+      "04": "Deluxe suite with romantic wine setup and ambient evening lighting",
+      "05": "Sophisticated main dining hall ready for breakfast, lunch, and dinner",
+      "06": "Open-air evening terrace illuminated by warm ambient lanterns",
+      "07": "Intimate wooden bar and cocktail lounge with premium spirit selections",
+      "08": "Handcrafted colorful signature mocktails and cocktails by our mixologists",
+      "09": "Grand banquet and buffet hall arranged for celebrations and gatherings"
+    }
+  },
+  "reviews": {
+    "eyebrow": "GUEST VOICES",
+    "headline": "Quiet Excellence, Truly Felt",
+    "sentence": "Real reviews from travelers who made Dosha Hotel their home in Adama.",
+    "overall": "4.8 out of 5",
+    "verified": "Based on verified Google reviews",
+    "item1": {
+      "text": "The calmest and most elegant stay in Adama. Spotless rooms, welcoming staff, and delicious dining.",
+      "date": "Recent stay"
+    },
+    "item2": {
+      "text": "The terrace at dusk is breathtaking. Great hot water, fast Wi-Fi, and very peaceful nights.",
+      "date": "Recent stay"
+    },
+    "item3": {
+      "text": "Outstanding service and location. Perfect stopover between Addis and Hawassa.",
+      "date": "Recent stay"
+    },
+    "item4": {
+      "text": "The reception team went above and beyond. The bar drinks and food exceeded all expectations.",
+      "date": "Recent stay"
+    },
+    "item5": {
+      "text": "Clean, modern, and very comfortable beds. Will definitely be returning every time I visit Nazret.",
+      "date": "Recent stay"
+    },
+    "item6": {
+      "text": "A genuine gem in Adama. Quiet luxury without any unnecessary noise or hassle.",
+      "date": "Recent stay"
+    }
+  },
+  "location": {
+    "eyebrow": "OUR LOCATION",
+    "headline": "Conveniently Situated in Adama (Nazret)",
+    "sentence": "Located along the Wonji Mazoria to Adama Steel Factory road, directly in front of Dembela Secondary School.",
+    "addressTitle": "Address",
+    "contactTitle": "Direct Inquiries",
+    "hoursTitle": "Reception",
+    "hours": "Open 24 Hours Daily",
+    "landmarkNote": "Directly facing Dembela Secondary School",
+    "viewOnGoogleMaps": "Open in Google Maps",
+    "getDirections": "Get Directions"
+  },
+  "booking": {
+    "modalTitle": "Reserve Your Room",
+    "modalSubtitle": "Direct WhatsApp booking with instant confirmation & personalized hospitality.",
+    "step1": "Reservation Details",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Abebe Bikila",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+251 91 123 4567",
+    "roomType": "Preferred Room",
+    "selectRoom": "Select a room type",
+    "checkInDate": "Check-in Date",
+    "checkOutDate": "Check-out Date",
+    "guests": "Number of Guests",
+    "adults": "Adults",
+    "children": "Children",
+    "paymentMethod": "Preferred Payment Method",
+    "selectPayment": "Select payment option",
+    "notes": "Special Requests (Optional)",
+    "notesPlaceholder": "Early check-in, dietary preferences, airport pickup inquiry...",
+    "submit": "Continue to WhatsApp Booking",
+    "submitting": "Opening WhatsApp...",
+    "nightsCalculated": "{count} night(s) selected",
+    "errorName": "Please enter your name.",
+    "errorPhone": "Please enter a valid phone number.",
+    "errorDates": "Check-out must be after check-in.",
+    "errorRoom": "Please select a room.",
+    "errorPayment": "Please choose a payment method.",
+    "paymentMethods": {
+      "telebirr": "Telebirr",
+      "cbe": "Commercial Bank of Ethiopia (CBE)",
+      "otherBank": "Other Bank Transfer",
+      "cash": "Cash on Arrival",
+      "card": "Credit/Debit Card (POS at Reception)"
+    },
+    "paymentInstructions": {
+      "telebirr": "Account: TELEBIRR_ACCOUNT_HERE (Dosha Hotel Adama). You can complete the transfer after reservation confirmation.",
+      "cbe": "CBE Account: CBE_ACCOUNT_HERE (Dosha Hotel Adama). Please share receipt upon arrival.",
+      "otherBank": "Bank details will be shared in WhatsApp chat upon booking confirmation.",
+      "cash": "Settle comfortably in cash (ETB or major currencies) at our front desk upon arrival.",
+      "card": "Visa & Mastercard POS terminals available at reception."
+    },
+    "redirectTitle": "Direct WhatsApp Booking",
+    "redirectDesc": "Your reservation details are formatted and ready. Click below if WhatsApp did not open automatically.",
+    "openWhatsappManual": "Open WhatsApp Now",
+    "orBookingCom": "Prefer Booking.com? Click below to view listings."
+  },
+  "footer": {
+    "tagline": "Adama's sanctuary of quiet luxury and authentic warmth.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "location": "Location",
+    "rights": "All rights reserved. Dosha Hotel Adama.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Stay"
+  },
+  "floating": {
+    "whatsappLabel": "Chat on WhatsApp",
+    "callLabel": "Call Hotel",
+    "languageLabel": "Change Language"
+  },
+  "loading": {
+    "tagline": "DOSHA HOTEL · ADAMA"
+  }
+}
