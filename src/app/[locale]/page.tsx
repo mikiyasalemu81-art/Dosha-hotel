@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import QuickBookingBar from '@/components/QuickBookingBar';
 import About from '@/components/About';
 import Rooms from '@/components/Rooms';
+import Facilities from '@/components/Facilities';
 import MarqueeRibbon from '@/components/MarqueeRibbon';
 import Restaurant from '@/components/Restaurant';
 import Gallery from '@/components/Gallery';
@@ -95,8 +96,11 @@ export default function HomePage() {
         {/* Marquee Ribbon */}
         <MarqueeRibbon />
 
-        {/* Rooms Section (Pinned horizontal scroll) */}
+        {/* Rooms Section */}
         <Rooms onSelectRoom={(roomId) => handleOpenBooking(roomId)} />
+
+        {/* Facilities Section */}
+        <Facilities />
 
         {/* Restaurant & Lounge Section */}
         <Restaurant />

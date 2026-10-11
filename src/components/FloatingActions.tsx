@@ -43,7 +43,7 @@ export const FloatingActions: React.FC = () => {
       {/* Call Now Button */}
       <div className="pointer-events-auto">
         <a
-          href={`tel:${siteConfig.phone}`}
+          href={siteConfig.phoneTel}
           className="w-12 h-12 rounded-full bg-white border border-sand hover:border-bronze text-ink-soft hover:text-bronze flex items-center justify-center shadow-soft backdrop-blur-md transition-all hover:scale-105 active:scale-95"
           aria-label={t('callLabel')}
           title={t('callLabel')}

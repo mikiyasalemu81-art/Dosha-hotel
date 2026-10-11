@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 interface RevealProps {
@@ -9,50 +9,51 @@ interface RevealProps {
   duration?: number;
   yOffset?: number;
   className?: string;
-  stagger?: boolean;
+  variant?: 'fade-up' | 'arch-grow' | 'fade-scale' | 'none';
 }
 
 export const Reveal: React.FC<RevealProps> = ({
   children,
   delay = 0,
-  duration = 0.85,
-  yOffset = 24,
+  duration = 0.8,
+  yOffset = 20,
   className = '',
-  stagger = false,
+  variant = 'fade-up',
 }) => {
   const shouldReduceMotion = useReducedMotion();
+  const [forcedVisible, setForcedVisible] = useState(false);
 
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
+  // Progressive enhancement fail-safe: force visible after 1.5s regardless of scroll/observer state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setForcedVisible(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (shouldReduceMotion || forcedVisible) {
+    return <div className={`opacity-100 ${className}`}>{children}</div>;
   }
 
-  if (stagger) {
-    return (
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.08,
-              delayChildren: delay,
-            },
-          },
-        }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  const initialVariant = {
+    opacity: 0,
+    y: variant === 'fade-up' ? yOffset : 0,
+    scale: variant === 'fade-scale' ? 0.95 : 1,
+    clipPath: variant === 'arch-grow' ? 'inset(30% 0% 0% 0% round 40px 40px 0 0)' : undefined,
+  };
+
+  const visibleVariant = {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    clipPath: variant === 'arch-grow' ? 'inset(0% 0% 0% 0% round 0px 0px 0 0)' : undefined,
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={initialVariant}
+      whileInView={visibleVariant}
+      viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
       transition={{
         duration,
         delay,
@@ -68,30 +69,12 @@ export const Reveal: React.FC<RevealProps> = ({
 export const RevealItem: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className = '' }) => {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
+  delay?: number;
+}> = ({ children, className = '', delay = 0 }) => {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.7,
-            ease: [0.16, 1, 0.3, 1],
-          },
-        },
-      }}
-      className={className}
-    >
+    <Reveal delay={delay} className={className}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 };
 

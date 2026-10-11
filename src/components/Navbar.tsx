@@ -57,6 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onLanguageTransit
 
   const navLinks = [
     { href: '#rooms', label: t('rooms') },
+    { href: '#facilities', label: t('facilities') },
     { href: '#restaurant', label: t('restaurant') },
     { href: '#gallery', label: t('gallery') },
     { href: '#reviews', label: t('reviews') },

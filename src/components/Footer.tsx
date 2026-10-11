@@ -84,6 +84,11 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="#facilities" className="text-ink-soft hover:text-bronze transition-colors">
+                  {tNav('facilities')}
+                </a>
+              </li>
+              <li>
                 <a href="#restaurant" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('restaurant')}
                 </a>
@@ -118,8 +123,8 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-bronze shrink-0" />
-                <a href={`tel:${siteConfig.phone}`} className="hover:text-bronze transition-colors">
-                  {siteConfig.phone}
+                <a href={siteConfig.phoneTel} className="hover:text-bronze transition-colors font-medium">
+                  {siteConfig.phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
@@ -128,9 +133,9 @@ export const Footer: React.FC = () => {
                   href={`https://wa.me/${siteConfig.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-bronze transition-colors"
+                  className="hover:text-bronze transition-colors font-medium"
                 >
-                  WhatsApp: {siteConfig.whatsappDisplay}
+                  WhatsApp: {siteConfig.phoneDisplay}
                 </a>
               </div>
             </div>

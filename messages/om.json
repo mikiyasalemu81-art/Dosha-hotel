@@ -21,6 +21,7 @@
   },
   "nav": {
     "rooms": "Kutaalee",
+    "facilities": "Tajaajiloota",
     "restaurant": "Mana Nyaataa & Baarii",
     "gallery": "Suuraalee",
     "reviews": "Yaada Daawwattootaa",
@@ -60,113 +61,169 @@
       },
       "dining": {
         "title": "Nyaata Filatamaa",
-        "desc": "Galma nyaataa ball'aa, baarii ammayyaa fi teerasiisa galgalaa hafuura qulqulluu qabu."
+        "desc": "Galma nyaataa bal'aa, baarii miidhagaa fi teessuma teeraasii ifa qilleensaa."
       }
     }
   },
   "rooms": {
     "eyebrow": "KUTAALEE BOQONNAA",
-    "headline": "Bakka Boqonnaa Tasgabbii fi Eenyummaa Qabu",
-    "sentence": "Kutaan hundi siree lallaafaa, ifa mijataa fi tajaajila ammayyaatiin guutameera.",
+    "headline": "Kutaalee Tasgabbii fi Boqonnaa Qulqulluu",
+    "sentence": "Kutaan hundi siree lallaafaa, ifa sirrii fi qulqullina ammayyaatiin kan qophaa'edha.",
     "bookRoom": "Kutaa kana qabadhaa",
-    "fromRate": "ETB {price} irraa / halkan",
+    "fromRate": "Qarshii {price} irraa / halkan",
     "priceTbd": "Gatiin gaaffiin beekama",
     "amenities": {
       "wifi": "Wi-Fi Saffisaa",
-      "tv": "TV Ammayyaa",
+      "tv": "TV Bal'aa",
       "hotWater": "Bishaan Ho'aa",
-      "breakfast": "Ciree Bilisaa",
+      "breakfast": "Ciree Mi'aawaa",
       "balcony": "Balkoonii Dhuunfaa"
     },
     "standardTwin": {
-      "name": "Istaandard Twiin",
-      "desc": "Siree lama qulqulluu fi mijataa, namoota waliin imalaniif kan qophaa'e."
+      "name": "Kutaa Siree Lakkuu (Standard Twin)",
+      "desc": "Siree lamatti qoodame, namoota waliin imalaniif kan mijaawu."
     },
     "deluxeDouble": {
-      "name": "Deelaks Daabilii",
-      "desc": "Kutaa bal'aa miira qananii fi turtii jaalalaa qabu."
+      "name": "Kutaa Siree Guddaa (Deluxe Double)",
+      "desc": "Siree guddaa fi lallaafaa qabu, boqonnaa guutuu kan kennu."
     },
     "executiveSuite": {
-      "name": "Egzakiyuutiv Suwiit",
-      "desc": "Bakka taa'umsaa addaa fi mijattina daldaltootaaf ta'u kan qabu."
+      "name": "Kutaa Egzakiyuutivii (Executive Suite)",
+      "desc": "Iddoo teessumaa bal'aa fi qulqullina ol'aanaa qaba."
     },
     "familyRoom": {
-      "name": "Kutaa Maatii",
-      "desc": "Maatii guutuuf bal'ina fi boqonnaa quubsaa kan kennu."
+      "name": "Kutaa Maatii (Family Room)",
+      "desc": "Maatii guutuuf kan ta'u, bal'ina fi mijattina addaa."
+    }
+  },
+  "facilities": {
+    "eyebrow": "TAJAAJILOOTA HOTEELICHA",
+    "headline": "Tajaajiloota Ammayyaa Boqonnaa Keessaniif",
+    "sentence": "Turtiin keessan gammachiisaa fi milkaa'aa akka ta'uuf wantoota barbaachisan hunda qopheessineerra.",
+    "draftNote": "Tarreen tajaajilootaa kun wixineedha. Hoteelicha waliin mirkaneeffadhaa.",
+    "items": {
+      "restaurant": {
+        "title": "Mana Nyaataa & Galma Nyaataa",
+        "desc": "Nyaata aadaa fi kan biyya alaa mi'aawaa dhiyeessa."
+      },
+      "bar": {
+        "title": "Baarii & Laawunjii",
+        "desc": "Dhugaatiiwwan filatamoo fi kokteeliiwwan babbareedoo."
+      },
+      "terrace": {
+        "title": "Teeraasii Galgalaa",
+        "desc": "Ifa faanoo jala qilleensa qulqulluu magaalaa Adaamaa waliin."
+      },
+      "reception": {
+        "title": "Riiseepshinii Sa'aatii 24",
+        "desc": "Keessummoota simachuuf sa'aatii hundumaa banaadha."
+      },
+      "wifi": {
+        "title": "Wi-Fi Saffisaa Bilisaan",
+        "desc": "Iddoo hundatti intarneetii saffisaa fi daangaa hin qabne."
+      },
+      "hotWater": {
+        "title": "Bishaan Ho'aa",
+        "desc": "Kutaalee hunda keessatti bishaan ho'aa yeroo mara ni argama."
+      },
+      "rooms": {
+        "title": "Kutaalee Balkoonii Qaban",
+        "desc": "Kutaalee bareedoo magaalaa mul'isan fi balkoonii qaban."
+      },
+      "eventHall": {
+        "title": "Galma Walga'ii & Cidhaa",
+        "desc": "Walga'iiwwan daldalaa fi cidhaaf galma bal'aa qophaa'e."
+      },
+      "parking": {
+        "title": "Iddoo Konkolaataa Eegumsa Qabu",
+        "desc": "Mooraa bal'aa fi eegumsa cimaa qabu."
+      },
+      "roomService": {
+        "title": "Tajaajila Kutaatti Dhiyeessuu",
+        "desc": "Nyaataa fi dhugaatii gara kutaa keessaniitti fiduu."
+      },
+      "laundry": {
+        "title": "Tajaajila Uffata Miiccuu",
+        "desc": "Uffata miiccuu fi qulqulleessuu saffisaa."
+      },
+      "security": {
+        "title": "Nageenya & Kaameraa CCTV",
+        "desc": "Eegumsa nageenyaa sa'aatii 24 fi kaameraa qulqulluu."
+      }
     }
   },
   "restaurant": {
-    "eyebrow": "MANA NYAATAA & LAWWUNJII",
-    "headline": "Dhandhama Addaa, Dhiha Biiftuu fi Dhugaatiiwwan Mi'aawaa",
-    "sentence": "Makkiiyaatoo ganamaa irraa kaasee hanga dhugaatiiwwan galgalaa teerasii irratti qophaa'anitti yeroo boonsaa dabarsaa.",
+    "eyebrow": "MANA NYAATAA & BAARII",
+    "headline": "Wiirtuu Nyaataa fi Dhugaatii Filatamaa",
+    "sentence": "Makkiiyaatoo ganamaa irraa kaasee hanga kokteelii galgalaatti yeroo boqonnaa gaarii dabarsaa.",
     "highlights": [
-      "Nyaata aadaa fi kan biyya alaa mi'aawaa",
-      "Kokteelii addaa fi dhugaatiiwwan filatamoo",
-      "Teerasii ifa kurraaziitiin bareede kan qilleensa qulqulluu qabu",
-      "Galma guddaa sirnootaa fi afeerraaf ta'u"
+      "Nyaata biyya keessaa fi biyya alaa dhandhama addaa",
+      "Kokteeliiwwan fi dhugaatiiwwan baarii filatamoo",
+      "Teeraasii qilleensa qulqulluu ifa faanoon miidhage",
+      "Galma bal'aa cidhaa fi qophiilee garaagaraatiif ta'u"
     ]
   },
   "gallery": {
-    "eyebrow": "SUURAALEE HOTEELICHAA",
-    "headline": "Mul'ata Hoteela Dooshaa",
-    "sentence": "Bareedina hoteelichaa, kutaalee boqonnaa fi iddoowwan bashannanaa daawwadhaa.",
+    "eyebrow": "SUURAALEE HOTEELICHA",
+    "headline": "Bifa Hoteela Dooshaa",
+    "sentence": "Miidhagina, kutaalee fi iddoowwan boqonnaa hoteela keenyaa daawwadhaa.",
     "all": "Suuraalee Hunda",
     "roomsTab": "Kutaalee",
     "diningTab": "Nyaata & Baarii",
     "spacesTab": "Bakkeewwan",
     "images": {
       "01": "Gamooma ammayyaa Hoteela Dooshaa Adaamaa daandii Wonjii irratti",
-      "02": "Galma simannaa (loobii) olka'aa fi bareedaa Hoteela Dooshaa",
-      "03": "Kutaa siree lama daraaraa rooziitiin faayame",
-      "04": "Kutaa deelaks wayinii fi ifa galgalaatiin miidhagfame",
-      "05": "Galma nyaataa ammayyaa ciree, laaqana fi irbaataaf qophaa'e",
-      "06": "Teerasii galgalaa ifa kurraaziitiin faayamee fi qilleensa qulqulluu qabu",
-      "07": "Baarii mukaa bareedaa fi lawwunjii dhugaatii addaa qabu",
-      "08": "Kokteelii fi dhugaatiiwwan bifa adda addaatiin miidhagfaman",
-      "09": "Galma buffee fi walga'ii guddaa sagantaalee addaatiif qophaa'e"
+      "02": "Galma riiseepshinii bal'aa keessummoota simatu",
+      "03": "Kutaa siree lakkuu qulqulluu abaaboon faayame",
+      "04": "Kutaa dhiyeessii woyinii fi ifa galgalaatiin qophaa'e",
+      "05": "Galma nyaataa ciree, laaqana fi irbaataaf qophaa'e",
+      "06": "Teeraasii galgalaa ifa faanoo qabu",
+      "07": "Baarii mukarraa tolfamee fi laawunjii tasgabbaa'aa",
+      "08": "Kokteeliiwwan babbareedoo ogeessaan qophaa'an",
+      "09": "Galma buffee bal'aa ayyaanaaf qophaa'e"
     }
   },
   "reviews": {
-    "eyebrow": "YAADA DAAWWATTOOTAA",
-    "headline": "Qulqullina Dhugaa fi Jaalala Daawwattootaa",
-    "sentence": "Yaada dhugaa keessummoonni Hoteela Dooshaa Adaamaa turan kennan.",
-    "overall": "4.8 / 5",
-    "verified": "Yaada Google Maps irratti mirkanaa'e",
+    "eyebrow": "SAGALEE KEESSUMMOOTAA",
+    "headline": "Qulqullina Dhugoomfame",
+    "sentence": "Yaada daawwattoota Hoteela Dooshaa keessa boqotanii turanii.",
+    "overall": "4.8 keessaa 5",
+    "verified": "Google Maps irratti kan mirkanaa'e",
     "item1": {
-      "text": "Adaamaa keessatti bakka tasgabbaa'aa fi qulqulluu ta'e. Hojjattoonni kabaja qabu, nyaatnis baay'ee mi'aawaadha.",
-      "date": "Turtii dhiyoo"
+      "text": "Hoteela hunda caalaa tasgabbaa'aa fi qulqulluu Adaamaa keessatti argamu. Hojjattoonni simannaa gaarii qabu.",
+      "date": "Dhiyeenya kan ture"
     },
     "item2": {
-      "text": "Teerasiin galgalaa baay'ee namatti tola. Bishaan ho'aa, Wi-Fi saffisaa fi boqonnaa gaarii argadheera.",
-      "date": "Turtii dhiyoo"
+      "text": "Teeraasiin galgalaa baay'ee miidhaga. Bishaan ho'aa fi Wi-Fi saffisaa qaba.",
+      "date": "Dhiyeenya kan ture"
     },
     "item3": {
-      "text": "Finfinnee irraa gara Hawaasaatti yeroon imalu bakka boqonnaa koo isa jalqabaati.",
-      "date": "Turtii dhiyoo"
+      "text": "Tajaajila gaarii fi bakka mijataa. Finfinnee irraa gara Hawaasaatti yeroo deemamu boqonnaaf kan filatamu.",
+      "date": "Dhiyeenya kan ture"
     },
     "item4": {
-      "text": "Simannaan keessummeessitootaa baay'ee na gammachiise. Dhugaatiin baariis daran filatamaadha.",
-      "date": "Turtii dhiyoo"
+      "text": "Hojjattoonni riiseepshinii baay'ee gargaarsa qabu. Nyaatni fi dhugaatiin baay'ee mi'aawaadha.",
+      "date": "Dhiyeenya kan ture"
     },
     "item5": {
-      "text": "Qulqulluu, ammayyaa fi siree baay'ee mijataa. Yeroo mara Adaamaa yoon dhufe Dooshaan filannoo kooti.",
-      "date": "Turtii dhiyoo"
+      "text": "Sireen kutaalee baay'ee mijataadha. Yeroo mara Nazreet yommuun dhufu asittin boqodha.",
+      "date": "Dhiyeenya kan ture"
     },
     "item6": {
-      "text": "Adaamaa keessatti qananii tasgabbaa'aa fi qulqulluu kan argattan asitti.",
-      "date": "Turtii dhiyoo"
+      "text": "Hoteela filatamaa magaalaa Adaamaa. Sagalee wacaa tokko malee boqonnaa qofa.",
+      "date": "Dhiyeenya kan ture"
     }
   },
   "location": {
     "eyebrow": "BAKKA ARGAMA KEENYA",
-    "headline": "Adaamaa (Naazireet) Keessatti Bakka Mijataa",
-    "sentence": "Daandii Wonjii Mazooriyaa irraa gara Warshaa Sibiilaa Adaamaatti, Mana Barumsaa Dambalaa fuuldura.",
+    "headline": "Magaalaa Adaamaa (Nazreet) Keessatti",
+    "sentence": "Daandii Wonjii Mazooriyaa irraa gara Warshaa Sibiilaa Adaamaatti, Mana Barumsaa Sad. 2ffaa Dambalaa fuuldura.",
     "addressTitle": "Teessoo",
-    "contactTitle": "Quunnamtii Kallattii",
+    "contactTitle": "Bilbila & WhatsApp",
     "hoursTitle": "Riiseepshinii",
     "hours": "Sa'aatii 24 Banaadha",
-    "landmarkNote": "Fuuldura Mana Barumsaa Sadarkaa 2ffaa Dambalaa",
-    "viewOnGoogleMaps": "Google Maps Irraatti Bani",
+    "landmarkNote": "Mana Barumsaa Dambalaa fuuldura",
+    "viewOnGoogleMaps": "Google Maps Irratti Bani",
     "getDirections": "Kallattii Argisiisi"
   },
   "booking": {
@@ -176,7 +233,7 @@
     "fullName": "Maqaa Guutuu",
     "fullNamePlaceholder": "Abebe Bikila",
     "phone": "Lakkoofsa Bilbilaa",
-    "phonePlaceholder": "+251 91 123 4567",
+    "phonePlaceholder": "0930 491 149",
     "roomType": "Kutaa Filattan",
     "selectRoom": "Gosa kutaa filadhaa",
     "checkInDate": "Guyyaa Galmaa",
@@ -196,6 +253,14 @@
     "errorDates": "Guyyaan ba'aa guyyaa galmaa booda ta'uu qaba.",
     "errorRoom": "Maaloo kutaa filadhaa.",
     "errorPayment": "Maaloo mala kafaltii filadhaa.",
+    "reservationSummary": "Cuunfaa Qabannaa",
+    "tapToExpandSummary": "Cuunfaa qabannaa ilaaluuf tuqaa",
+    "chooseDatesHelp": "Guyyoota galmaa fi ba'aa filadhaa",
+    "chooseGuestsHelp": "Baay'ina keessummootaa filadhaa",
+    "chooseRoomHelp": "Kutaa filattan filadhaa",
+    "choosePaymentHelp": "Mala kafaltii filadhaa",
+    "enterDetailsHelp": "Maqaa fi bilbila keessan galchaa",
+    "sendViaWhatsapp": "WhatsApp'n Ergaa",
     "paymentMethods": {
       "telebirr": "Telebirr",
       "cbe": "Baankii Daldala Itoophiyaa (CBE)",

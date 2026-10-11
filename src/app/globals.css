@@ -58,6 +58,14 @@ body {
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1;
+}
+
+.font-serif,
+h1, h2, h3, h4, h5, h6 {
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Ethiopic Typography Safety: Ensure glyphs are never clipped */

@@ -49,13 +49,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {/* Backdrop */}
           <div className="fixed inset-0" onClick={onClose} />
 
-          {/* Modal Container: Full-screen modal on desktop, bottom sheet on mobile */}
+          {/* Modal Container: Full-height sheet on mobile (100dvh), centered card on desktop */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.98 }}
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.98 }}
+            exit={{ opacity: 0, y: 40, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl bg-white rounded-t-[28px] sm:rounded-card shadow-soft overflow-hidden p-6 sm:p-10 z-10 max-h-[92vh] flex flex-col my-0 sm:my-auto border border-sand/70"
+            className="relative w-full max-w-4xl bg-white rounded-t-[28px] sm:rounded-card shadow-soft overflow-hidden p-4 sm:p-8 z-10 h-[100dvh] sm:h-auto sm:max-h-[92vh] flex flex-col my-0 sm:my-auto border border-sand/70"
           >
             <ConversationalBooking
               initialRoomId={initialRoomId}

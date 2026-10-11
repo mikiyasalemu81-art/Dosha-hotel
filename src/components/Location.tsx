@@ -74,8 +74,8 @@ export const Location: React.FC = () => {
                     {t('contactTitle')}
                   </h4>
                   <div className="flex flex-col gap-1 text-sm font-medium text-ink">
-                    <a href={`tel:${siteConfig.phone}`} className="hover:text-bronze transition-colors">
-                      {siteConfig.phone}
+                    <a href={siteConfig.phoneTel} className="hover:text-bronze transition-colors">
+                      {siteConfig.phoneDisplay}
                     </a>
                     <a
                       href={`https://wa.me/${siteConfig.whatsappNumber}`}
@@ -84,7 +84,7 @@ export const Location: React.FC = () => {
                       className="text-bronze flex items-center gap-1.5 text-xs hover:underline mt-0.5"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
-                      <span>{siteConfig.whatsappDisplay}</span>
+                      <span>{siteConfig.phoneDisplay}</span>
                     </a>
                   </div>
                 </div>

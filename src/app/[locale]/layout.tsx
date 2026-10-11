@@ -128,7 +128,7 @@ export default async function LocaleLayout({
     name: siteConfig.hotelName,
     description: "Where Adama's warmth meets quiet luxury.",
     url: siteUrl,
-    telephone: siteConfig.phone,
+    telephone: '+251930491149',
     image: [
       `${siteUrl}/images/dosha-hotel-adama-01-exterior-building.jpg`,
       `${siteUrl}/images/dosha-hotel-adama-02-lobby-reception.jpg`,
@@ -157,7 +157,7 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />

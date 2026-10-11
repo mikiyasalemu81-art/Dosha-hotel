@@ -31,12 +31,15 @@ npm run start
 
 All content, telephone numbers, room rates, and bank accounts are centralized in [`src/config/site.ts`](file:///c:/Users/ps/Desktop/dosha%20hotel/src/config/site.ts).
 
-### 1) Phone & WhatsApp Numbers
+### 1) Official Phone & WhatsApp Numbers
 ```typescript
-phone: '+251 91 123 4567', // For direct tel: links
-whatsappNumber: '251911234567', // Digits only with country code (no '+' or spaces)
-whatsappDisplay: '+251 91 123 4567', // Human-friendly display
+export const PHONE_DISPLAY = '0930 491 149';
+export const PHONE_TEL = 'tel:+251930491149';
+export const WHATSAPP_NUMBER = '251930491149';
 ```
+
+> **Important Note on Facilities**:
+> The facilities list is a draft. Confirm each item with the hotel and remove anything not offered. Do not claim star ratings or any other facts not provided.
 
 ### 2) Room Rates
 By default, room prices are set to `'PRICE_TBD'`. To display numeric rates:

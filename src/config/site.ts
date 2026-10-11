@@ -1,3 +1,7 @@
+export const PHONE_DISPLAY = '0930 491 149';
+export const PHONE_TEL = 'tel:+251930491149';
+export const WHATSAPP_NUMBER = '251930491149';
+
 export interface RoomAmenity {
   id: 'wifi' | 'tv' | 'hotWater' | 'breakfast' | 'balcony';
   icon: string;
@@ -11,6 +15,13 @@ export interface RoomType {
   image: string;
   amenities: ('wifi' | 'tv' | 'hotWater' | 'breakfast' | 'balcony')[];
   capacity: number;
+}
+
+export interface FacilityItem {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  iconName: string; // lucide-react icon identifier
 }
 
 export interface ReviewItem {
@@ -36,6 +47,8 @@ export interface SiteConfig {
   locationShort: string;
   tagline: string;
   phone: string;
+  phoneDisplay: string;
+  phoneTel: string;
   whatsappNumber: string; // international digits without + or spaces for wa.me
   whatsappDisplay: string;
   email: string;
@@ -66,6 +79,7 @@ export interface SiteConfig {
     maxScore: number;
   };
   rooms: RoomType[];
+  facilities: FacilityItem[];
   reviews: ReviewItem[];
   paymentMethods: PaymentMethodInfo[];
   images: {
@@ -82,16 +96,93 @@ export interface SiteConfig {
   };
 }
 
+// 12 Draft Facilities - owner can edit/remove any item
+export const FACILITIES: FacilityItem[] = [
+  {
+    id: 'restaurant',
+    titleKey: 'facilities.items.restaurant.title',
+    descKey: 'facilities.items.restaurant.desc',
+    iconName: 'UtensilsCrossed',
+  },
+  {
+    id: 'bar',
+    titleKey: 'facilities.items.bar.title',
+    descKey: 'facilities.items.bar.desc',
+    iconName: 'Wine',
+  },
+  {
+    id: 'terrace',
+    titleKey: 'facilities.items.terrace.title',
+    descKey: 'facilities.items.terrace.desc',
+    iconName: 'Sunset',
+  },
+  {
+    id: 'reception',
+    titleKey: 'facilities.items.reception.title',
+    descKey: 'facilities.items.reception.desc',
+    iconName: 'Clock',
+  },
+  {
+    id: 'wifi',
+    titleKey: 'facilities.items.wifi.title',
+    descKey: 'facilities.items.wifi.desc',
+    iconName: 'Wifi',
+  },
+  {
+    id: 'hotWater',
+    titleKey: 'facilities.items.hotWater.title',
+    descKey: 'facilities.items.hotWater.desc',
+    iconName: 'Droplets',
+  },
+  {
+    id: 'rooms',
+    titleKey: 'facilities.items.rooms.title',
+    descKey: 'facilities.items.rooms.desc',
+    iconName: 'BedDouble',
+  },
+  {
+    id: 'eventHall',
+    titleKey: 'facilities.items.eventHall.title',
+    descKey: 'facilities.items.eventHall.desc',
+    iconName: 'Sparkles',
+  },
+  {
+    id: 'parking',
+    titleKey: 'facilities.items.parking.title',
+    descKey: 'facilities.items.parking.desc',
+    iconName: 'Car',
+  },
+  {
+    id: 'roomService',
+    titleKey: 'facilities.items.roomService.title',
+    descKey: 'facilities.items.roomService.desc',
+    iconName: 'Bell',
+  },
+  {
+    id: 'laundry',
+    titleKey: 'facilities.items.laundry.title',
+    descKey: 'facilities.items.laundry.desc',
+    iconName: 'Shirt',
+  },
+  {
+    id: 'security',
+    titleKey: 'facilities.items.security.title',
+    descKey: 'facilities.items.security.desc',
+    iconName: 'ShieldCheck',
+  },
+];
+
 export const siteConfig: SiteConfig = {
   hotelName: 'Dosha Hotel Adama',
   hotelShortName: 'Dosha Hotel',
   locationShort: 'Adama, Ethiopia',
   tagline: "Where Adama's warmth meets quiet luxury",
   
-  // Editable contact placeholders
-  phone: 'PHONE_NUMBER_HERE',
-  whatsappNumber: 'WHATSAPP_NUMBER_HERE',
-  whatsappDisplay: 'WHATSAPP_NUMBER_HERE',
+  phone: PHONE_DISPLAY,
+  phoneDisplay: PHONE_DISPLAY,
+  phoneTel: PHONE_TEL,
+  whatsappNumber: WHATSAPP_NUMBER,
+  whatsappDisplay: PHONE_DISPLAY,
   email: 'info@doshahoteladama.com',
 
   address: {
@@ -108,14 +199,11 @@ export const siteConfig: SiteConfig = {
     lng: 39.2742,
   },
 
-  // Verified link from user prompt
   googleMapsUrl: 'https://maps.app.goo.gl/YwU39RgfTSRhy2YG7',
   
-  // Clean, responsive embed for Adama location
   googleMapsEmbedUrl:
     'https://maps.google.com/maps?q=Dosha+Hotel,+Wonji+Mazoria,+Adama,+Ethiopia&t=&z=15&ie=UTF8&iwloc=&output=embed',
 
-  // Booking.com external URL (leave empty string to hide)
   bookingComUrl: '',
 
   socials: {
@@ -131,7 +219,6 @@ export const siteConfig: SiteConfig = {
     maxScore: 5.0,
   },
 
-  // 4 Sample room types defined per spec
   rooms: [
     {
       id: 'standard-twin',
@@ -171,7 +258,8 @@ export const siteConfig: SiteConfig = {
     },
   ],
 
-  // 6 structured reviews for owner replacement
+  facilities: FACILITIES,
+
   reviews: [
     {
       id: 'review-1',
@@ -223,7 +311,6 @@ export const siteConfig: SiteConfig = {
     },
   ],
 
-  // Payment methods and account details
   paymentMethods: [
     {
       id: 'telebirr',

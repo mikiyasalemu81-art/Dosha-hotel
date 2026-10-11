@@ -21,6 +21,7 @@
   },
   "nav": {
     "rooms": "Rooms",
+    "facilities": "Facilities",
     "restaurant": "Restaurant & Bar",
     "gallery": "Gallery",
     "reviews": "Reviews",
@@ -93,6 +94,62 @@
     "familyRoom": {
       "name": "Family Room",
       "desc": "Generous proportions and harmonious layout designed for the comfort of the entire family."
+    }
+  },
+  "facilities": {
+    "eyebrow": "HOTEL FACILITIES",
+    "headline": "Curated Amenities for an Effortless Stay",
+    "sentence": "Designed with precision to bring you restorative comfort, seamless hospitality, and modern convenience.",
+    "draftNote": "The facilities list is a draft. Confirm each item with the hotel and remove anything not offered.",
+    "items": {
+      "restaurant": {
+        "title": "Restaurant & Dining Hall",
+        "desc": "Freshly prepared authentic Ethiopian cuisine and continental specialties."
+      },
+      "bar": {
+        "title": "Bar & Lounge",
+        "desc": "Signature crafted cocktails, local beverages, and fine spirits in an intimate setting."
+      },
+      "terrace": {
+        "title": "Evening Terrace",
+        "desc": "Open-air patio under Adama stars with ambient lantern illumination."
+      },
+      "reception": {
+        "title": "24-Hour Reception",
+        "desc": "Attentive front desk and concierge assistance available round the clock."
+      },
+      "wifi": {
+        "title": "High-Speed Wi-Fi",
+        "desc": "Complimentary seamless wireless connectivity across all hotel spaces."
+      },
+      "hotWater": {
+        "title": "Reliable Hot Water",
+        "desc": "Dependable high-pressure hot water systems in every guest bathroom."
+      },
+      "rooms": {
+        "title": "Twin & Double Rooms",
+        "desc": "Comfortable guest accommodations featuring private balconies and city vistas."
+      },
+      "eventHall": {
+        "title": "Event & Meeting Hall",
+        "desc": "Spacious versatile hall tailored for celebrations, gatherings, and business meetings."
+      },
+      "parking": {
+        "title": "Secure On-Site Parking",
+        "desc": "Dedicated parking grounds monitored for total peace of mind."
+      },
+      "roomService": {
+        "title": "Room Service",
+        "desc": "In-room dining and refreshment service delivered directly to your door."
+      },
+      "laundry": {
+        "title": "Laundry Service",
+        "desc": "Prompt garment cleaning, pressing, and freshening upon request."
+      },
+      "security": {
+        "title": "Security & CCTV",
+        "desc": "24/7 trained security personnel and property-wide surveillance."
+      }
     }
   },
   "restaurant": {
@@ -176,7 +233,7 @@
     "fullName": "Full Name",
     "fullNamePlaceholder": "Abebe Bikila",
     "phone": "Phone Number",
-    "phonePlaceholder": "+251 91 123 4567",
+    "phonePlaceholder": "0930 491 149",
     "roomType": "Preferred Room",
     "selectRoom": "Select a room type",
     "checkInDate": "Check-in Date",
@@ -196,6 +253,14 @@
     "errorDates": "Check-out must be after check-in.",
     "errorRoom": "Please select a room.",
     "errorPayment": "Please choose a payment method.",
+    "reservationSummary": "Reservation Summary",
+    "tapToExpandSummary": "Tap to view reservation summary",
+    "chooseDatesHelp": "Choose your check-in and check-out dates",
+    "chooseGuestsHelp": "Select number of guests",
+    "chooseRoomHelp": "Select your preferred room",
+    "choosePaymentHelp": "Select your payment method",
+    "enterDetailsHelp": "Enter your name and phone number",
+    "sendViaWhatsapp": "Send via WhatsApp",
     "paymentMethods": {
       "telebirr": "Telebirr",
       "cbe": "Commercial Bank of Ethiopia (CBE)",
