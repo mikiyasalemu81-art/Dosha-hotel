@@ -7,21 +7,25 @@ export const LoadingScreen: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Check session storage to avoid replay on repeat visits within same session
-    if (typeof window !== 'undefined') {
-      const hasLoaded = sessionStorage.getItem('dosha_splash_viewed_v2');
-      if (hasLoaded) {
-        setIsVisible(false);
-        return;
+    try {
+      if (typeof window !== 'undefined') {
+        const hasLoaded = sessionStorage.getItem('dosha_splash_viewed_v2');
+        if (hasLoaded) {
+          setIsVisible(false);
+          return;
+        }
+
+        const timer = setTimeout(() => {
+          setIsVisible(false);
+          try {
+            sessionStorage.setItem('dosha_splash_viewed_v2', 'true');
+          } catch {}
+        }, 1200);
+
+        return () => clearTimeout(timer);
       }
-
-      // Max 1.4s loading animation
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-        sessionStorage.setItem('dosha_splash_viewed_v2', 'true');
-      }, 1400);
-
-      return () => clearTimeout(timer);
+    } catch {
+      setIsVisible(false);
     }
   }, []);
 

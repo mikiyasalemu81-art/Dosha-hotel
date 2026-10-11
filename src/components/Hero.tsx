@@ -161,7 +161,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
           {/* Right: Arch frame */}
           <div className="lg:col-span-6 z-10 flex flex-col items-center lg:items-end">
             <div className="relative w-full max-w-[540px] h-[58vh] sm:h-[68vh] lg:h-[82vh] arch-mask overflow-hidden border border-sand/60 bg-champagne shadow-soft">
-              <div className="relative w-full h-full overflow-hidden">
+              <div
+                className="relative w-full h-full overflow-hidden transition-all duration-1000 ease-arch"
+                style={currentTransition.animate}
+              >
                 <Image
                   key={currentIndex}
                   src={images[currentIndex]}
@@ -169,8 +172,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                   fill
                   priority={currentIndex === 0}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center transition-all duration-1000 ease-arch"
-                  style={currentTransition.animate}
+                  className="object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent pointer-events-none" />
               </div>

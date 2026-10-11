@@ -83,7 +83,7 @@ export default function HomePage() {
         onLanguageTransition={handleLanguageTransition}
       />
 
-      <main className="flex-1 w-full overflow-hidden">
+      <main className="flex-1 w-full">
         {/* Hero Section */}
         <Hero onOpenBooking={() => handleOpenBooking()} />
 

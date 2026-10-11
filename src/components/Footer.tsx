@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
   const locale = useLocale();
 
   return (
-    <footer className="relative bg-champagne border-t border-sand/80 pt-20 pb-28 sm:pb-20 text-ink-soft">
+    <footer className="relative bg-champagne border-t border-sand/80 pt-20 pb-28 sm:pb-20 text-ink-soft opacity-100">
       <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-14 pb-16 border-b border-sand">
           {/* Col 1: Big Wordmark, Tagline, Socials */}

@@ -12,7 +12,7 @@ export const Location: React.FC = () => {
   return (
     <section
       id="location"
-      className="relative py-28 sm:py-36 lg:py-44 bg-paper border-b border-sand/60 overflow-hidden"
+      className="relative py-28 sm:py-36 lg:py-44 bg-paper border-b border-sand/60 overflow-hidden opacity-100"
     >
       <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

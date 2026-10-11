@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 interface RevealProps {
@@ -21,45 +21,54 @@ export const Reveal: React.FC<RevealProps> = ({
   variant = 'fade-up',
 }) => {
   const shouldReduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const [forcedVisible, setForcedVisible] = useState(false);
 
-  // Progressive enhancement fail-safe: force visible after 1.5s regardless of scroll/observer state
+  // Progressive enhancement fail-safe: force visible after 1.0s
   useEffect(() => {
+    setMounted(true);
     const timer = setTimeout(() => {
       setForcedVisible(true);
-    }, 1500);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  if (shouldReduceMotion || forcedVisible) {
-    return <div className={`opacity-100 ${className}`}>{children}</div>;
+  // Progressive enhancement: show immediately on SSR or if forced visible / reduced motion
+  if (!mounted || shouldReduceMotion || forcedVisible) {
+    return (
+      <div
+        className={className}
+        style={{ opacity: 1, transform: 'none', clipPath: 'none' }}
+      >
+        {children}
+      </div>
+    );
   }
 
   const initialVariant = {
-    opacity: 0,
+    opacity: 0.05,
     y: variant === 'fade-up' ? yOffset : 0,
-    scale: variant === 'fade-scale' ? 0.95 : 1,
-    clipPath: variant === 'arch-grow' ? 'inset(30% 0% 0% 0% round 40px 40px 0 0)' : undefined,
+    scale: variant === 'fade-scale' ? 0.98 : 1,
   };
 
   const visibleVariant = {
     opacity: 1,
     y: 0,
     scale: 1,
-    clipPath: variant === 'arch-grow' ? 'inset(0% 0% 0% 0% round 0px 0px 0 0)' : undefined,
   };
 
   return (
     <motion.div
       initial={initialVariant}
       whileInView={visibleVariant}
-      viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{
         duration,
         delay,
         ease: [0.16, 1, 0.3, 1],
       }}
       className={className}
+      style={{ opacity: 1 }}
     >
       {children}
     </motion.div>

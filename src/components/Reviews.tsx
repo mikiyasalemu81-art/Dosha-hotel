@@ -26,7 +26,7 @@ export const Reviews: React.FC = () => {
   return (
     <section
       id="reviews"
-      className="relative py-28 sm:py-36 lg:py-44 bg-champagne/45 border-b border-sand/60 overflow-hidden"
+      className="relative py-28 sm:py-36 lg:py-44 bg-champagne/45 border-b border-sand/60 overflow-hidden opacity-100"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Header */}
