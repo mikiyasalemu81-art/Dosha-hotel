@@ -13,24 +13,24 @@ export const Footer: React.FC = () => {
   const locale = useLocale();
 
   return (
-    <footer className="relative bg-ink border-t border-graphite/60 pt-16 pb-24 sm:pb-16 text-sand">
+    <footer className="relative bg-champagne border-t border-sand/80 pt-20 pb-28 sm:pb-20 text-ink-soft">
       <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-graphite/60">
-          {/* Col 1: Logo & Tagline */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-14 pb-16 border-b border-sand">
+          {/* Col 1: Big Wordmark, Tagline, Socials */}
           <div className="lg:col-span-5 flex flex-col items-start">
-            <Logo size="md" className="mb-4" />
-            <p className="text-xs text-sand/70 max-w-sm font-light leading-relaxed mb-6">
+            <Logo size="lg" className="mb-4" />
+            <p className="text-xs sm:text-sm text-ink-soft max-w-sm font-light leading-relaxed mb-6">
               {t('tagline')}
             </p>
 
-            {/* Social Icons */}
+            {/* Socials */}
             <div className="flex items-center gap-3">
               {siteConfig.socials.instagram && (
                 <a
                   href={siteConfig.socials.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-sm bg-charcoal border border-graphite flex items-center justify-center text-sand hover:text-gold hover:border-gold/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white border border-sand flex items-center justify-center text-ink-soft hover:text-bronze hover:border-bronze transition-colors shadow-sm"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-4 h-4" />
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.socials.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-sm bg-charcoal border border-graphite flex items-center justify-center text-sand hover:text-gold hover:border-gold/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white border border-sand flex items-center justify-center text-ink-soft hover:text-bronze hover:border-bronze transition-colors shadow-sm"
                   aria-label="Facebook"
                 >
                   <Facebook className="w-4 h-4" />
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.socials.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-sm bg-charcoal border border-graphite flex items-center justify-center text-sand hover:text-gold hover:border-gold/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white border border-sand flex items-center justify-center text-ink-soft hover:text-bronze hover:border-bronze transition-colors shadow-sm"
                   aria-label="Telegram"
                 >
                   <Send className="w-4 h-4" />
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.socials.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-sm bg-charcoal border border-graphite flex items-center justify-center text-sand hover:text-gold hover:border-gold/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white border border-sand flex items-center justify-center text-ink-soft hover:text-bronze hover:border-bronze transition-colors shadow-sm"
                   aria-label="TikTok"
                 >
                   <Music2 className="w-4 h-4" />
@@ -72,34 +72,34 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
+          {/* Col 2: Minimal Navigation Links */}
           <div className="lg:col-span-3 flex flex-col">
-            <h4 className="font-serif text-sm uppercase tracking-[0.2em] text-ivory mb-4">
+            <h4 className="font-serif text-sm uppercase tracking-[0.2em] text-ink mb-4 font-normal">
               {t('navigation')}
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#rooms" className="text-sand/80 hover:text-gold transition-colors link-gold-underline">
+                <a href="#rooms" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('rooms')}
                 </a>
               </li>
               <li>
-                <a href="#restaurant" className="text-sand/80 hover:text-gold transition-colors link-gold-underline">
+                <a href="#restaurant" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('restaurant')}
                 </a>
               </li>
               <li>
-                <a href="#gallery" className="text-sand/80 hover:text-gold transition-colors link-gold-underline">
+                <a href="#gallery" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('gallery')}
                 </a>
               </li>
               <li>
-                <a href="#reviews" className="text-sand/80 hover:text-gold transition-colors link-gold-underline">
+                <a href="#reviews" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('reviews')}
                 </a>
               </li>
               <li>
-                <a href="#location" className="text-sand/80 hover:text-gold transition-colors link-gold-underline">
+                <a href="#location" className="text-ink-soft hover:text-bronze transition-colors">
                   {tNav('location')}
                 </a>
               </li>
@@ -108,27 +108,27 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Direct Inquiries */}
           <div className="lg:col-span-4 flex flex-col">
-            <h4 className="font-serif text-sm uppercase tracking-[0.2em] text-ivory mb-4">
+            <h4 className="font-serif text-sm uppercase tracking-[0.2em] text-ink mb-4 font-normal">
               {t('contact')}
             </h4>
-            <div className="space-y-3 text-xs text-sand/80">
+            <div className="space-y-3 text-xs text-ink-soft">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-bronze shrink-0 mt-0.5" />
                 <span className="leading-relaxed">{siteConfig.address.full}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-gold shrink-0" />
-                <a href={`tel:${siteConfig.phone}`} className="hover:text-gold transition-colors">
+                <Phone className="w-4 h-4 text-bronze shrink-0" />
+                <a href={`tel:${siteConfig.phone}`} className="hover:text-bronze transition-colors">
                   {siteConfig.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <MessageSquare className="w-4 h-4 text-gold shrink-0" />
+                <MessageSquare className="w-4 h-4 text-bronze shrink-0" />
                 <a
                   href={`https://wa.me/${siteConfig.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold transition-colors"
+                  className="hover:text-bronze transition-colors"
                 >
                   WhatsApp: {siteConfig.whatsappDisplay}
                 </a>
@@ -136,18 +136,18 @@ export const Footer: React.FC = () => {
             </div>
 
             <div className="mt-6">
-              <LanguageSwitcher variant="minimal" />
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright line */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-sand/60 gap-4">
+        {/* Bottom Bar: Minimal Copyright */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-ink-soft/70 gap-4">
           <p>© {new Date().getFullYear()} {siteConfig.hotelName}. {t('rights')}</p>
           <div className="flex items-center gap-6">
             <span>{siteConfig.locationShort}</span>
-            <span className="text-graphite">·</span>
-            <a href="#about" className="hover:text-gold transition-colors">
+            <span className="text-sand">·</span>
+            <a href="#about" className="hover:text-bronze transition-colors">
               Dosha Hospitality
             </a>
           </div>

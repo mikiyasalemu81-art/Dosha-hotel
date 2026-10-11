@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Calendar, Users, ArrowRight, ExternalLink } from 'lucide-react';
+import { Calendar, Users, ArrowRight } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
 interface QuickBookingBarProps {
@@ -19,7 +19,6 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
   const t = useTranslations('quickBook');
   const tCommon = useTranslations('common');
 
-  // Today and tomorrow default strings YYYY-MM-DD
   const today = new Date().toISOString().split('T')[0];
   const tomorrowDate = new Date();
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
@@ -40,20 +39,20 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
 
   return (
     <>
-      {/* Desktop Floating Glass Card overlapping bottom of hero */}
-      <div className="relative z-30 -mt-10 sm:-mt-14 max-w-site mx-auto px-4 sm:px-6 lg:px-8 hidden md:block">
-        <div className="glass-panel rounded-sm p-4 sm:p-5 shadow-2xl border border-gold/25 backdrop-blur-xl">
+      {/* Desktop Floating White Glass Card overlapping bottom of Hero */}
+      <div className="relative z-30 -mt-12 sm:-mt-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:block">
+        <div className="bg-white/85 backdrop-blur-xl rounded-card p-5 lg:p-6 shadow-soft border border-sand/70">
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center"
+            className="grid grid-cols-1 md:grid-cols-4 gap-5 items-center"
           >
             {/* Check-In */}
             <div className="flex flex-col">
               <label
                 htmlFor="desktop-checkin"
-                className="text-[11px] uppercase tracking-wider text-sand/80 font-medium mb-1.5 flex items-center gap-1.5"
+                className="text-[11px] uppercase tracking-[0.2em] text-bronze font-semibold mb-1.5 flex items-center gap-1.5"
               >
-                <Calendar className="w-3.5 h-3.5 text-gold" />
+                <Calendar className="w-3.5 h-3.5 text-bronze" />
                 <span>{t('checkIn')}</span>
               </label>
               <input
@@ -62,7 +61,7 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
                 value={checkIn}
                 min={today}
                 onChange={(e) => setCheckIn(e.target.value)}
-                className="bg-charcoal/80 border border-graphite rounded-sm px-3 py-2 text-xs text-ivory focus:border-gold focus:outline-none transition-colors"
+                className="bg-paper border border-sand/70 rounded-pill px-3.5 py-2 text-xs text-ink focus:border-bronze focus:outline-none transition-colors"
                 required
               />
             </div>
@@ -71,9 +70,9 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
             <div className="flex flex-col">
               <label
                 htmlFor="desktop-checkout"
-                className="text-[11px] uppercase tracking-wider text-sand/80 font-medium mb-1.5 flex items-center gap-1.5"
+                className="text-[11px] uppercase tracking-[0.2em] text-bronze font-semibold mb-1.5 flex items-center gap-1.5"
               >
-                <Calendar className="w-3.5 h-3.5 text-gold" />
+                <Calendar className="w-3.5 h-3.5 text-bronze" />
                 <span>{t('checkOut')}</span>
               </label>
               <input
@@ -82,7 +81,7 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
                 value={checkOut}
                 min={checkIn || today}
                 onChange={(e) => setCheckOut(e.target.value)}
-                className="bg-charcoal/80 border border-graphite rounded-sm px-3 py-2 text-xs text-ivory focus:border-gold focus:outline-none transition-colors"
+                className="bg-paper border border-sand/70 rounded-pill px-3.5 py-2 text-xs text-ink focus:border-bronze focus:outline-none transition-colors"
                 required
               />
             </div>
@@ -91,16 +90,16 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
             <div className="flex flex-col">
               <label
                 htmlFor="desktop-guests"
-                className="text-[11px] uppercase tracking-wider text-sand/80 font-medium mb-1.5 flex items-center gap-1.5"
+                className="text-[11px] uppercase tracking-[0.2em] text-bronze font-semibold mb-1.5 flex items-center gap-1.5"
               >
-                <Users className="w-3.5 h-3.5 text-gold" />
+                <Users className="w-3.5 h-3.5 text-bronze" />
                 <span>{t('guests')}</span>
               </label>
               <select
                 id="desktop-guests"
                 value={guests}
                 onChange={(e) => setGuests(Number(e.target.value))}
-                className="bg-charcoal/80 border border-graphite rounded-sm px-3 py-2 text-xs text-ivory focus:border-gold focus:outline-none transition-colors cursor-pointer"
+                className="bg-paper border border-sand/70 rounded-pill px-3.5 py-2 text-xs text-ink focus:border-bronze focus:outline-none transition-colors cursor-pointer"
               >
                 <option value={1}>{t('guestOption1')}</option>
                 <option value={2}>{t('guestOption2')}</option>
@@ -109,40 +108,28 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
               </select>
             </div>
 
-            {/* Actions: Check Availability + Optional Booking.com */}
-            <div className="flex items-center gap-2 pt-5">
+            {/* Bronze Check Availability Button */}
+            <div className="pt-5">
               <button
                 type="submit"
-                className="btn-gold flex-1 text-center justify-center gap-2 !py-2.5 !min-h-[42px] text-xs"
+                className="btn-bronze w-full text-center flex items-center justify-center gap-2 !py-2.5 !min-h-[42px] text-xs"
                 id="quick-book-check-btn"
               >
                 <span>{t('cta')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-
-              {siteConfig.bookingComUrl && (
-                <a
-                  href={siteConfig.bookingComUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary !py-2.5 !px-3 !min-h-[42px] text-xs flex items-center justify-center gap-1.5 text-sand hover:text-ivory"
-                  title={tCommon('bookOnBookingCom')}
-                >
-                  <ExternalLink className="w-3.5 h-3.5 text-gold" />
-                </a>
-              )}
             </div>
           </form>
         </div>
       </div>
 
-      {/* Mobile Sticky Bottom CTA Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-ink/90 backdrop-blur-xl border-t border-graphite/80 p-3.5 md:hidden flex items-center justify-between gap-3 shadow-2xl pb-[max(0.875rem,env(safe-area-inset-bottom))]">
+      {/* Mobile Sticky Bottom Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-xl border-t border-sand/80 p-3.5 md:hidden flex items-center justify-between gap-3 shadow-soft pb-[max(0.875rem,env(safe-area-inset-bottom))]">
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-wider text-sand/70">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-ink-soft">
             {siteConfig.hotelShortName}
           </span>
-          <span className="font-serif text-sm text-gold font-light">
+          <span className="font-serif text-sm text-bronze font-normal">
             {tCommon('priceOnRequest')}
           </span>
         </div>
@@ -155,7 +142,7 @@ export const QuickBookingBar: React.FC<QuickBookingBarProps> = ({
               guests,
             })
           }
-          className="btn-gold !py-2 !px-4 !min-h-[40px] text-xs flex items-center gap-1.5"
+          className="btn-bronze !py-2 !px-4 !min-h-[40px] text-xs flex items-center gap-1.5"
           id="mobile-sticky-book-btn"
         >
           <span>{tCommon('bookNow')}</span>

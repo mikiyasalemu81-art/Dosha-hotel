@@ -9,6 +9,10 @@ import SmoothScroll from '@/components/SmoothScroll';
 import Cursor from '@/components/Cursor';
 import LoadingScreen from '@/components/LoadingScreen';
 import FloatingActions from '@/components/FloatingActions';
+import ScrollProgress from '@/components/ScrollProgress';
+import TabTitlePolish from '@/components/TabTitlePolish';
+import { ThemeProvider } from '@/components/ThemeContext';
+import { SoundProvider } from '@/components/SoundContext';
 import '@/app/globals.css';
 
 export function generateStaticParams() {
@@ -26,9 +30,9 @@ export async function generateMetadata({
     [key: string]: { title: string; description: string };
   } = {
     en: {
-      title: 'Dosha Hotel Adama | Luxury Hotel & Dining in Adama, Ethiopia',
+      title: 'Dosha Hotel Adama | Clean Bright Luxury & Boutique Hospitality',
       description:
-        "Where Adama's warmth meets quiet luxury. Serene rooms, exquisite dining, open-air evening terrace, and refined Ethiopian hospitality along the Wonji corridor.",
+        "Where Adama's warmth meets quiet luxury. Sunlit guest rooms, fine dining, open-air evening terrace, and boutique Ethiopian hospitality along the Wonji corridor.",
     },
     am: {
       title: 'ዶሻ ሆቴል አዳማ | የቅንጦት ማረፊያ እና ሬስቶራንት በአዳማ (ናዝሬት)',
@@ -98,7 +102,7 @@ export async function generateMetadata({
     },
     icons: {
       icon: '/favicon.svg',
-      apple: '/favicon.svg',
+      apple: '/apple-touch-icon.svg',
     },
   };
 }
@@ -156,24 +160,46 @@ export default async function LocaleLayout({
     <html lang={locale} className="scroll-smooth">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
-        {/* Preconnect to Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+        {/* Anti-FOUC Theme Script: Calculate Adama local time before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var saved = localStorage.getItem('dosha_theme_mode');
+                var theme = 'day';
+                if (saved === 'evening' || saved === 'day') {
+                  theme = saved;
+                } else {
+                  var hour = new Date().getUTCHours() + 3; // UTC+3 East Africa Time
+                  if (hour >= 24) hour -= 24;
+                  theme = (hour >= 6 && hour < 18) ? 'day' : 'evening';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+              } catch (e) {}
+            `,
+          }}
+        />
         {/* Schema.org Hotel JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelJsonLd) }}
         />
       </head>
-      <body className="bg-ink text-ivory antialiased selection:bg-gold/30 selection:text-white">
+      <body className="bg-paper text-ink antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <SmoothScroll>
-            <LoadingScreen />
-            <Cursor />
-            <div className="relative min-h-screen flex flex-col">{children}</div>
-            <FloatingActions />
-          </SmoothScroll>
+          <ThemeProvider>
+            <SoundProvider>
+              <SmoothScroll>
+                <TabTitlePolish />
+                <ScrollProgress />
+                <LoadingScreen />
+                <Cursor />
+                <div className="relative min-h-screen flex flex-col">{children}</div>
+                <FloatingActions />
+              </SmoothScroll>
+            </SoundProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

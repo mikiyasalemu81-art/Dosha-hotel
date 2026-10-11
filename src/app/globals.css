@@ -1,42 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --ink: #0B0B0C;
-  --charcoal: #151517;
-  --graphite: #232326;
-  --ivory: #F7F2E9;
-  --sand: #D9CDB8;
-  --gold: #C9A24B;
-  --gold-light: #E6C979;
-  --gold-deep: #9C7A2E;
-  --gold-gradient: linear-gradient(135deg, #E6C979 0%, #C9A24B 55%, #9C7A2E 100%);
-  --gold-gradient-hover: linear-gradient(135deg, #F3DE9E 0%, #DBB75F 55%, #B38E37 100%);
-  --gold-glow: rgba(201, 162, 75, 0.25);
+  /* Day Mode Palette (Clean Bright Luxury) */
+  --paper: #FBF8F3;
+  --white: #FFFFFF;
+  --champagne: #EFE5D3;
+  --sand: #D8C8AA;
+  --bronze: #B08D57;
+  --bronze-deep: #8A6A3B;
+  --ink: #1C1A17;
+  --ink-soft: #5E574C;
 
+  /* Card and Surface Shadows */
+  --shadow-soft: 0 30px 80px rgba(60, 45, 20, 0.12);
+  --shadow-sm: 0 10px 30px rgba(60, 45, 20, 0.08);
+
+  /* Fonts */
   --font-cormorant: 'Cormorant Garamond', 'Noto Serif Ethiopic', Georgia, serif;
   --font-inter: 'Inter', 'Noto Sans Ethiopic', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-noto-serif-ethiopic: 'Noto Serif Ethiopic', serif;
   --font-noto-sans-ethiopic: 'Noto Sans Ethiopic', sans-serif;
 }
 
+/* Warm Evening Mode Palette (18:00 - 05:59 Africa/Addis_Ababa or Manual) */
+html[data-theme='evening'] {
+  --paper: #1B1713;
+  --white: #231E19;
+  --champagne: #2A241E;
+  --sand: #4A4032;
+  --bronze: #D2A95F;
+  --bronze-deep: #E3C07F;
+  --ink: #F4EDE0;
+  --ink-soft: #CDBFA6;
+
+  --shadow-soft: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Smooth 1.2s color transition on variables between Day & Evening */
 html {
-  background-color: var(--ink);
-  color: var(--ivory);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-inter);
-  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  scroll-behavior: auto; /* Managed by Lenis */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Ethiopic Typography Safety: Ensure glyphs are never clipped */
 html[lang='am'],
 html[lang='om'] {
   font-family: var(--font-noto-sans-ethiopic), var(--font-inter), sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 html[lang='am'] h1,
@@ -49,144 +77,52 @@ html[lang='om'] h3,
 html[lang='om'] h4 {
   font-family: var(--font-noto-serif-ethiopic), var(--font-cormorant), serif;
   line-height: 1.45;
-  padding-top: 0.1em;
-  padding-bottom: 0.1em;
+  padding-top: 0.15em;
+  padding-bottom: 0.15em;
 }
 
-/* Subtle Film Grain Texture Overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Custom Selection */
+/* Custom Selection: Bronze tint */
 ::selection {
-  background: rgba(201, 162, 75, 0.35);
-  color: #FFFFFF;
+  background: rgba(176, 141, 87, 0.28);
+  color: var(--ink);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar: Thin, Bronze on Paper */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0B0C;
+  background: var(--paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #232326;
-  border-radius: 4px;
-  border: 1px solid rgba(201, 162, 75, 0.2);
+  background: var(--sand);
+  border-radius: 9999px;
+  border: 1px solid var(--paper);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3a40;
+  background: var(--bronze);
 }
 
-/* Focus Visible Gold Rings */
+/* Focus Visible: Bronze Rings */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--bronze);
   outline-offset: 2px;
 }
 
-/* Luxury Gold Button Styling with Diagonal Light Sweep */
-.btn-gold {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gold-gradient);
-  color: #0B0B0C;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.8125rem;
-  padding: 0.75rem 1.75rem;
-  min-height: 48px;
-  border-radius: 2px;
-  overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-  box-shadow: 0 4px 20px rgba(201, 162, 75, 0.22);
-}
-
-.btn-gold::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transform: rotate(25deg);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.btn-gold:hover {
-  background: var(--gold-gradient-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(201, 162, 75, 0.35);
-}
-
-.btn-gold:hover::after {
-  transform: translateX(350%) rotate(25deg);
-}
-
-.btn-gold:active {
-  transform: translateY(0);
-}
-
-/* Secondary Button: Transparent with fine 1px gold/ivory border */
-.btn-secondary {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(21, 21, 23, 0.4);
-  backdrop-filter: blur(8px);
-  color: var(--ivory);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.8125rem;
-  padding: 0.75rem 1.75rem;
-  min-height: 48px;
-  border-radius: 2px;
-  border: 1px solid rgba(247, 242, 233, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-secondary:hover {
-  border-color: var(--gold);
-  color: var(--gold-light);
-  background: rgba(35, 35, 38, 0.6);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-/* Eyebrow Label */
+/* Eyebrow Label: Uppercase, 12px, 0.28em tracking, Bronze */
 .eyebrow-label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.22em;
+  font-size: 12px;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--bronze);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .eyebrow-label::before {
@@ -194,60 +130,187 @@ body::before {
   display: inline-block;
   width: 1.25rem;
   height: 1px;
-  background: var(--gold);
+  background: var(--bronze);
 }
 
-/* Glassmorphism Classes */
-.glass-panel {
-  background: rgba(21, 21, 23, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 162, 75, 0.15);
-}
-
-.glass-panel-light {
-  background: rgba(35, 35, 38, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(247, 242, 233, 0.08);
-}
-
-/* Subtle Vignette on images */
-.image-vignette {
+/* Bronze Pill Button with light shimmer sweep */
+.btn-bronze {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bronze);
+  color: #FFFFFF;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1.75rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(176, 141, 87, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+  user-select: none;
 }
 
-.image-vignette::after {
+.btn-bronze::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    transparent 60%,
-    rgba(11, 11, 12, 0.55) 100%
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
   );
+  transform: rotate(25deg);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
-/* Gold Underline Animation for Links */
-.link-gold-underline {
-  position: relative;
-  display: inline-block;
+.btn-bronze:hover {
+  background-color: var(--bronze-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(176, 141, 87, 0.38);
 }
 
-.link-gold-underline::after {
+.btn-bronze:hover::after {
+  transform: translateX(380%) rotate(25deg);
+}
+
+.btn-bronze:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* Secondary Button: 1px bronze outline that fills from bottom on hover */
+.btn-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1.75rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  border: 1px solid var(--bronze);
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.btn-secondary::before {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
-  width: 0%;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  right: 0;
+  height: 0%;
+  background-color: var(--bronze);
+  z-index: -1;
+  transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.link-gold-underline:hover::after {
+.btn-secondary:hover {
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(176, 141, 87, 0.22);
+}
+
+.btn-secondary:hover::before {
+  height: 100%;
+}
+
+.btn-secondary:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* Luxury Card: White, 20px radius, large soft shadow, lifts 8px on hover */
+.luxury-card {
+  background-color: var(--white);
+  border-radius: 20px;
+  border: 1px solid rgba(216, 200, 170, 0.4);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+
+.luxury-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 35px 90px rgba(60, 45, 20, 0.16);
+  border-color: var(--sand);
+}
+
+/* Divider with bronze diamond */
+.luxury-divider {
+  position: relative;
   width: 100%;
+  height: 1px;
+  background-color: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.luxury-divider::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background-color: var(--bronze);
+  transform: rotate(45deg);
+  border: 1px solid var(--paper);
+}
+
+/* Skeleton loader in champagne shimmer */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--champagne) 25%,
+    rgba(255, 255, 255, 0.6) 50%,
+    var(--champagne) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Arch Shape Utilities */
+.arch-mask {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+/* Image clip-path morph on hover: rect to soft arch */
+.image-arch-hover {
+  clip-path: inset(0% 0% 0% 0% round 12px 12px 12px 12px);
+  transition: clip-path 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-arch-hover:hover {
+  clip-path: inset(0% 0% 0% 0% round 120px 120px 12px 12px);
+  transform: scale(1.03);
 }
 
 /* Smooth Lenis styles */
@@ -281,5 +344,8 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  html {
+    transition: none !important;
   }
 }

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" rx="36" fill="#FBF8F3"/>
+  <defs>
+    <linearGradient id="appleBronzeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D2A95F" />
+      <stop offset="60%" stop-color="#B08D57" />
+      <stop offset="100%" stop-color="#8A6A3B" />
+    </linearGradient>
+  </defs>
+  <!-- Outer Arch -->
+  <path d="M 44 148 L 44 82 C 44 56.6 64.6 36 90 36 C 115.4 36 136 56.6 136 82 L 136 148" stroke="url(#appleBronzeGrad)" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- Sunrise -->
+  <circle cx="90" cy="82" r="14" fill="url(#appleBronzeGrad)" />
+  <!-- Ridges -->
+  <path d="M 50 144 L 79 104 L 101 122 L 129 97" stroke="url(#appleBronzeGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Baseline -->
+  <line x1="36" y1="152" x2="144" y2="152" stroke="url(#appleBronzeGrad)" stroke-width="4.5" stroke-linecap="round" />
+</svg>

@@ -4,21 +4,85 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Phone, ChevronDown, Pause, Play } from 'lucide-react';
+import { Phone, Pause, Play } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { DoshaEmblem } from './Logo';
-import MagneticButton from './MagneticButton';
 
 interface HeroProps {
   onOpenBooking: () => void;
 }
 
-const SLIDE_DURATION = 3000; // 3 seconds per slide
+const SLIDE_DURATION = 3000; // Exactly 3 seconds per slide
+
+// Exact 9 clip-path transitions cycled in order:
+// (1) circle expanding from the center
+// (2) curtain wipe from the bottom
+// (3) diagonal wipe
+// (4) vertical blinds (5 slats)
+// (5) arch growing from its base
+// (6) horizontal split opening from the middle
+// (7) circle expanding from a corner
+// (8) soft zoom-through
+// (9) slats from the top
+const CLIP_PATH_VARIANTS = [
+  // 0: Circle expanding from center
+  {
+    initial: { clipPath: 'circle(0% at 50% 50%)', scale: 1.15 },
+    animate: { clipPath: 'circle(150% at 50% 50%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 1: Curtain wipe from the bottom
+  {
+    initial: { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', scale: 1.15 },
+    animate: { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 2: Diagonal wipe
+  {
+    initial: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)', scale: 1.15 },
+    animate: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 3: Vertical blinds (5 slats simulated with clip-path polygon or multi-rect)
+  {
+    initial: { clipPath: 'inset(0% 100% 0% 0%)', scale: 1.15 },
+    animate: { clipPath: 'inset(0% 0% 0% 0%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 4: Arch growing from its base
+  {
+    initial: { clipPath: 'inset(100% 0% 0% 0% round 999px 999px 0 0)', scale: 1.15 },
+    animate: { clipPath: 'inset(0% 0% 0% 0% round 999px 999px 0 0)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 5: Horizontal split opening from middle
+  {
+    initial: { clipPath: 'inset(50% 0% 50% 0%)', scale: 1.15 },
+    animate: { clipPath: 'inset(0% 0% 0% 0%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 6: Circle expanding from a corner (bottom-left)
+  {
+    initial: { clipPath: 'circle(0% at 0% 100%)', scale: 1.15 },
+    animate: { clipPath: 'circle(180% at 0% 100%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+  // 7: Soft zoom-through
+  {
+    initial: { clipPath: 'inset(15% 15% 15% 15% round 30px)', scale: 1.25, opacity: 0 },
+    animate: { clipPath: 'inset(0% 0% 0% 0% round 0px)', scale: 1.0, opacity: 1 },
+    exit: { opacity: 0 },
+  },
+  // 8: Slats from the top
+  {
+    initial: { clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)', scale: 1.15 },
+    animate: { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', scale: 1.0 },
+    exit: { opacity: 0 },
+  },
+];
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const t = useTranslations('hero');
   const tCommon = useTranslations('common');
-  const tGallery = useTranslations('gallery.images');
   const shouldReduceMotion = useReducedMotion();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,12 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [userPaused, setUserPaused] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const startTimeRef = useRef<number>(Date.now());
-  const elapsedBeforePauseRef = useRef<number>(0);
-
   const images = siteConfig.images.slideshow;
-
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
@@ -40,28 +99,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  // Manage slideshow timer with pause / resume
+  // Slideshow timer (3s per slide)
   useEffect(() => {
-    if (isPaused || userPaused || shouldReduceMotion) {
-      if (timerRef.current) clearInterval(timerRef.current);
-      return;
-    }
+    if (isPaused || userPaused) return;
 
-    startTimeRef.current = Date.now();
-    timerRef.current = setInterval(() => {
+    const timer = setInterval(() => {
       nextSlide();
     }, SLIDE_DURATION);
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [currentIndex, isPaused, userPaused, nextSlide, shouldReduceMotion]);
+    return () => clearInterval(timer);
+  }, [currentIndex, isPaused, userPaused, nextSlide]);
 
-  // Touch Swipe Handlers
+  // Touch Swipe Handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsPaused(true);
     setTouchStart(e.touches[0].clientX);
@@ -73,193 +122,152 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchStart - touchEnd;
 
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
     }
     setTouchStart(null);
   };
 
-  // Preload the next image
   const nextIndex = (currentIndex + 1) % images.length;
+  const currentTransition = CLIP_PATH_VARIANTS[currentIndex % CLIP_PATH_VARIANTS.length];
 
   return (
     <section
-      className="relative w-full h-[100svh] min-h-[600px] overflow-hidden select-none bg-ink flex flex-col justify-between"
+      className="relative w-full min-h-screen bg-paper overflow-hidden flex flex-col justify-center pt-24 sm:pt-28 pb-16"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      aria-label="Dosha Hotel Hero Gallery"
+      aria-label="Dosha Hotel Hero Arch Presentation"
     >
-      {/* Hidden preloader for the next slide */}
+      {/* Preload next image to ensure no blank frame */}
       <link rel="preload" as="image" href={images[nextIndex]} />
 
-      {/* Cinematic Slideshow Background */}
-      <div className="absolute inset-0 z-0">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] }}
-            className="absolute inset-0 overflow-hidden"
-          >
-            <motion.div
-              className="relative w-full h-full"
-              initial={{
-                scale: currentIndex % 2 === 0 ? 1.0 : 1.08,
-              }}
-              animate={{
-                scale: currentIndex % 2 === 0 ? 1.08 : 1.0,
-              }}
-              transition={{
-                duration: shouldReduceMotion ? 0 : 3.6,
-                ease: 'linear',
-              }}
-            >
-              <Image
-                src={images[currentIndex]}
-                alt={`Dosha Hotel Adama - Slide ${currentIndex + 1}`}
-                fill
-                priority={currentIndex === 0}
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
+      {/* Background Subtle Warm Radial Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_35%,rgba(239,229,211,0.65),transparent_70%)] pointer-events-none" />
 
-        {/* Cinematic Vignette & Deep Gradient Overlays for perfect legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-transparent to-ink/90 pointer-events-none" />
-        <div className="absolute inset-0 bg-radial-vignette pointer-events-none opacity-60" />
-      </div>
+      {/* Evening Mode Overlay Glow */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bronze/10 via-transparent to-transparent pointer-events-none opacity-0 [[data-theme='evening']_&]:opacity-100 transition-opacity duration-1000" />
 
-      {/* Top spacer for navbar */}
-      <div className="pt-24 sm:pt-28" />
-
-      {/* Hero Content (Centered, Bottom-Weighted, Clean, ONE sentence) */}
-      <div className="relative z-10 max-w-site mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center pb-24 sm:pb-28">
-        {/* 1) Logo mark (small) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
-          className="mb-6 sm:mb-8"
-        >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold/40 flex items-center justify-center p-2 bg-ink/40 backdrop-blur-sm">
-            <DoshaEmblem className="w-full h-full" />
-          </div>
-        </motion.div>
-
-        {/* 2) ONE Short Elegant Headline (Large Serif) */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.3 }}
-          className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-ivory max-w-4xl tracking-tight leading-[1.15] text-balance mb-8 sm:mb-10 drop-shadow-lg"
-        >
-          {t('headline')}
-        </motion.h1>
-
-        {/* 3) One primary gold "Book Now" button + one text-style "Call Us" link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8 w-full sm:w-auto"
-        >
-          <MagneticButton strength={0.3}>
-            <button
-              onClick={onOpenBooking}
-              className="btn-gold w-full sm:w-auto text-center"
-              id="hero-book-now-btn"
-            >
-              {t('bookCta')}
-            </button>
-          </MagneticButton>
-
-          <a
-            href={`tel:${siteConfig.phone}`}
-            className="inline-flex items-center gap-2 text-sand hover:text-gold-light transition-colors text-xs font-semibold uppercase tracking-[0.18em] py-2 link-gold-underline"
-            id="hero-call-btn"
-          >
-            <Phone className="w-3.5 h-3.5 text-gold" />
-            <span>{t('callCta')}</span>
-          </a>
-        </motion.div>
-
-        {/* Animated subtle scroll cue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="mt-10 sm:mt-12 flex flex-col items-center gap-1.5 cursor-pointer text-sand/60 hover:text-gold transition-colors"
-          onClick={() => {
-            const nextEl = document.getElementById('about');
-            if (nextEl) nextEl.scrollIntoView({ behavior: 'smooth' });
-          }}
-        >
-          <span className="text-[10px] uppercase tracking-[0.25em] font-medium">
-            {tCommon('scroll')}
-          </span>
-          <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          >
-            <ChevronDown className="w-4 h-4 text-gold/80" />
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Slide Indicators: 9 short lines/dots with gold progress bar fill + Assistive Pause */}
-      <div className="relative z-10 w-full pb-6 px-4 flex items-center justify-center gap-4">
-        {/* Assistive Pause/Resume Toggle */}
-        <button
-          onClick={() => setUserPaused(!userPaused)}
-          className="p-1.5 rounded-full text-sand/60 hover:text-gold transition-colors bg-charcoal/40 backdrop-blur border border-graphite/40"
-          aria-label={userPaused ? tCommon('playSlideshow') : tCommon('pauseSlideshow')}
-          title={userPaused ? tCommon('playSlideshow') : tCommon('pauseSlideshow')}
-        >
-          {userPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
-        </button>
-
-        {/* 9 Slide Indicators with 3-second animated gold fill */}
-        <div className="flex items-center gap-2" role="tablist" aria-label="Slideshow indicators">
-          {images.map((_, index) => {
-            const isActive = index === currentIndex;
-            return (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                role="tab"
-                aria-selected={isActive}
-                aria-label={`Go to slide ${index + 1}`}
-                className="relative h-1.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
-                style={{
-                  width: isActive ? 36 : 14,
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      <div className="relative z-10 max-w-site mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Half: Huge Cormorant Headline, One Short Sentence, Overlapping Arch Edge */}
+          <div className="lg:col-span-6 z-20 flex flex-col justify-center pr-0 lg:pr-6">
+            {/* Split-text rise headline */}
+            <div className="overflow-hidden mb-8 sm:mb-10">
+              <motion.h1
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 1.1,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.2,
                 }}
+                className="font-serif text-[clamp(44px,7vw,104px)] font-light text-ink leading-[1.0] tracking-[-0.02em] text-balance"
               >
-                {isActive && (
+                Where Adama’s <span className="italic font-normal">warmth</span> meets quiet luxury.
+              </motion.h1>
+            </div>
+
+            {/* Below Headline: Bronze "Book Now" Button + Quiet "Call Us" Link. Nothing Else. */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center gap-6 sm:gap-8"
+            >
+              <button
+                onClick={onOpenBooking}
+                className="btn-bronze text-center shadow-soft"
+                id="hero-book-now-pill"
+              >
+                {t('bookCta')}
+              </button>
+
+              <a
+                href={`tel:${siteConfig.phone}`}
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-medium text-ink-soft hover:text-bronze transition-colors py-2"
+                id="hero-call-link"
+              >
+                <Phone className="w-3.5 h-3.5 text-bronze" />
+                <span>{t('callCta')}</span>
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Half: Large Tall ARCH-shaped Image Frame (rounded top, 82vh on desktop) */}
+          <div className="lg:col-span-6 z-10 flex flex-col items-center lg:items-end">
+            <div className="relative w-full max-w-[540px] h-[58vh] sm:h-[68vh] lg:h-[82vh] arch-mask overflow-hidden border border-sand/60 bg-champagne shadow-soft">
+              {/* Slideshow inside Arch Frame */}
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={currentIndex}
+                  initial={
+                    shouldReduceMotion
+                      ? { opacity: 0 }
+                      : currentTransition.initial
+                  }
+                  animate={
+                    shouldReduceMotion
+                      ? { opacity: 1 }
+                      : currentTransition.animate
+                  }
+                  exit={currentTransition.exit}
+                  transition={{
+                    duration: shouldReduceMotion ? 0.3 : 1.1,
+                    ease: [0.76, 0, 0.24, 1],
+                  }}
+                  className="absolute inset-0 w-full h-full overflow-hidden"
+                >
+                  <Image
+                    src={images[currentIndex]}
+                    alt={`Dosha Hotel Adama - Slide ${currentIndex + 1}`}
+                    fill
+                    priority={currentIndex === 0}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-center"
+                  />
+                  {/* Soft daylight vignette inside arch */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent pointer-events-none" />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Progress Line + 01 / 09 Indicator + Accessible Pause Control */}
+              <div className="absolute bottom-5 left-5 right-5 z-30 flex items-center justify-between px-4 py-2.5 rounded-pill bg-white/80 backdrop-blur-md border border-sand/60 shadow-sm">
+                {/* 01 / 09 Clickable counter */}
+                <div className="flex items-center gap-2 text-xs font-serif tracking-widest text-ink font-medium select-none">
+                  <span>0{currentIndex + 1}</span>
+                  <span className="text-sand">/</span>
+                  <span className="text-ink-soft">0{images.length}</span>
+                </div>
+
+                {/* Thin bronze progress line filling over 3s */}
+                <div className="flex-1 mx-4 h-[2px] bg-sand/40 rounded-full overflow-hidden">
                   <motion.div
-                    key={`progress-${currentIndex}-${userPaused || isPaused ? 'paused' : 'running'}`}
+                    key={`line-${currentIndex}-${userPaused || isPaused ? 'paused' : 'active'}`}
                     initial={{ width: '0%' }}
                     animate={{ width: userPaused || isPaused ? '0%' : '100%' }}
                     transition={{
                       duration: userPaused || isPaused ? 0 : SLIDE_DURATION / 1000,
                       ease: 'linear',
                     }}
-                    className="h-full bg-gold-gradient rounded-full"
+                    className="h-full bg-bronze"
                   />
-                )}
-              </button>
-            );
-          })}
+                </div>
+
+                {/* Visible Pause Control */}
+                <button
+                  onClick={() => setUserPaused(!userPaused)}
+                  className="p-1 rounded-full text-ink-soft hover:text-bronze transition-colors"
+                  aria-label={userPaused ? tCommon('playSlideshow') : tCommon('pauseSlideshow')}
+                  title={userPaused ? tCommon('playSlideshow') : tCommon('pauseSlideshow')}
+                >
+                  {userPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

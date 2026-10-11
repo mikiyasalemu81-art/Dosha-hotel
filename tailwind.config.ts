@@ -9,49 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#0B0B0C',
-        charcoal: '#151517',
-        graphite: '#232326',
-        ivory: '#F7F2E9',
-        sand: '#D9CDB8',
-        gold: {
-          light: '#E6C979',
-          DEFAULT: '#C9A24B',
-          deep: '#9C7A2E',
+        paper: 'var(--paper)',
+        white: 'var(--white)',
+        champagne: 'var(--champagne)',
+        sand: 'var(--sand)',
+        bronze: {
+          DEFAULT: 'var(--bronze)',
+          deep: 'var(--bronze-deep)',
         },
-      },
-      backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #E6C979 0%, #C9A24B 55%, #9C7A2E 100%)',
-        'gold-gradient-hover': 'linear-gradient(135deg, #F3DE9E 0%, #DBB75F 55%, #B38E37 100%)',
-        'charcoal-fade': 'linear-gradient(180deg, rgba(21, 21, 23, 0.8) 0%, #0B0B0C 100%)',
+        ink: {
+          DEFAULT: 'var(--ink)',
+          soft: 'var(--ink-soft)',
+        },
       },
       fontFamily: {
         serif: ['var(--font-cormorant)', 'var(--font-noto-serif-ethiopic)', 'Georgia', 'serif'],
         sans: ['var(--font-inter)', 'var(--font-noto-sans-ethiopic)', 'sans-serif'],
       },
       borderRadius: {
-        none: '0',
-        sm: '2px',
-        DEFAULT: '2px',
-        md: '4px',
-        lg: '4px',
-        full: '9999px',
+        card: '20px',
+        pill: '9999px',
+        arch: '9999px 9999px 0 0',
       },
       maxWidth: {
         site: '1280px',
       },
-      animation: {
-        'pulse-subtle': 'pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'shimmer': 'shimmer 2.5s infinite',
+      boxShadow: {
+        soft: 'var(--shadow-soft)',
+        sm: 'var(--shadow-sm)',
       },
-      keyframes: {
-        pulseSubtle: {
-          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-          '50%': { opacity: '0.85', transform: 'scale(1.02)' },
-        },
-        shimmer: {
-          '100%': { transform: 'translateX(100%)' },
-        },
+      transitionTimingFunction: {
+        luxury: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        arch: 'cubic-bezier(0.76, 0, 0.24, 1)',
       },
     },
   },

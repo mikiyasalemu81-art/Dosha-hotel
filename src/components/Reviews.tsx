@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Star, ExternalLink, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { siteConfig, ReviewItem } from '@/config/site';
-import Reveal from './Reveal';
 
 export const Reviews: React.FC = () => {
   const t = useTranslations('reviews');
@@ -21,107 +21,88 @@ export const Reviews: React.FC = () => {
     setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
+  const current = reviews[currentIndex];
+
   return (
     <section
       id="reviews"
-      className="relative py-24 sm:py-32 lg:py-40 bg-ink border-b border-graphite/40 overflow-hidden"
+      className="relative py-28 sm:py-36 lg:py-44 bg-champagne/45 border-b border-sand/60 overflow-hidden"
     >
-      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header & Overall Rating Badge */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 sm:mb-16 gap-6">
-          <div className="max-w-xl">
-            <Reveal>
-              <span className="eyebrow-label mb-3">{t('eyebrow')}</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-ivory tracking-tight leading-[1.2] mb-3">
-                {t('headline')}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="text-sand/80 text-sm sm:text-base font-light">
-                {t('sentence')}
-              </p>
-            </Reveal>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Header */}
+        <span className="eyebrow-label mb-3 justify-center">{t('eyebrow')}</span>
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-ink tracking-tight leading-[1.15] mb-4">
+          {t('headline')}
+        </h2>
+        <p className="text-ink-soft text-sm sm:text-base font-light mb-12 max-w-xl mx-auto">
+          {t('sentence')}
+        </p>
+
+        {/* Large Centered Quote Carousel Card */}
+        <div className="relative bg-white rounded-card p-8 sm:p-14 shadow-soft border border-sand/70">
+          <div className="w-12 h-12 rounded-full bg-champagne/60 border border-sand flex items-center justify-center mx-auto mb-6 text-bronze">
+            <Quote className="w-6 h-6" />
           </div>
 
-          {/* Overall Rating Badge */}
-          <Reveal delay={0.2} className="shrink-0">
-            <div className="p-4 sm:p-5 rounded-sm bg-charcoal/90 border border-gold/30 flex items-center gap-4 shadow-xl">
-              <div className="flex flex-col items-center justify-center pr-4 border-r border-graphite">
-                <span className="font-serif text-3xl font-light text-gold leading-none">
-                  {siteConfig.overallRating.score.toFixed(1)}
-                </span>
-                <span className="text-[10px] text-sand/60 tracking-wider uppercase mt-1">
-                  / {siteConfig.overallRating.maxScore.toFixed(1)}
-                </span>
-              </div>
-              <div>
-                <div className="flex items-center gap-1 mb-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                  ))}
-                </div>
-                <p className="text-xs text-sand/80 font-medium">
-                  {t('verified')}
+          {/* 5 Bronze Stars */}
+          <div className="flex items-center justify-center gap-1.5 mb-6">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-bronze text-bronze" />
+            ))}
+          </div>
+
+          <div className="min-h-[140px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4 }}
+                className="max-w-2xl"
+              >
+                <p className="font-serif text-xl sm:text-2xl md:text-3xl text-ink font-light leading-relaxed italic mb-8">
+                  &ldquo;{t(`${current.textKey.replace('reviews.', '')}` as any)}&rdquo;
                 </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
 
-        {/* Carousel Presentation */}
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {reviews.map((rev: ReviewItem, idx: number) => {
-              const isActive = idx === currentIndex;
-              return (
-                <Reveal
-                  key={rev.id}
-                  delay={idx * 0.1}
-                  className={`flex flex-col justify-between p-6 sm:p-8 rounded-sm bg-charcoal/60 border transition-all duration-300 ${
-                    isActive
-                      ? 'border-gold/50 shadow-[0_4px_25px_rgba(201,162,75,0.12)]'
-                      : 'border-graphite/70'
-                  }`}
-                >
-                  <div>
-                    {/* Gold Star Rating */}
-                    <div className="flex items-center gap-1 mb-4">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                      ))}
-                    </div>
+                <div className="flex flex-col items-center gap-1">
+                  <h4 className="font-sans font-medium text-ink text-sm sm:text-base tracking-wide">
+                    {current.name}
+                  </h4>
+                  <span className="text-xs text-ink-soft/75">
+                    {t(`${current.dateKey.replace('reviews.', '')}` as any)} · Google Maps Verified
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                    <Quote className="w-6 h-6 text-gold/30 mb-2" />
+          {/* Carousel Navigation Arrows */}
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-sand/40">
+            <button
+              onClick={prevReview}
+              className="p-2.5 rounded-full border border-sand hover:border-bronze text-ink-soft hover:text-bronze transition-colors shadow-sm"
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
 
-                    {/* Short Quote */}
-                    <p className="text-sm sm:text-base font-serif text-ivory/95 font-light leading-relaxed mb-6 italic">
-                      &ldquo;{t(`${rev.textKey.replace('reviews.', '')}` as any)}&rdquo;
-                    </p>
-                  </div>
+            <span className="text-xs font-serif tracking-widest text-ink-soft">
+              0{currentIndex + 1} / 0{reviews.length}
+            </span>
 
-                  {/* Guest Name & Source */}
-                  <div className="pt-4 border-t border-graphite/60 flex items-center justify-between text-xs">
-                    <div>
-                      <h4 className="font-medium text-ivory tracking-wide">{rev.name}</h4>
-                      <span className="text-[11px] text-sand/60 font-light">
-                        {t(`${rev.dateKey.replace('reviews.', '')}` as any)}
-                      </span>
-                    </div>
-
-                    <span className="text-[10px] tracking-wider uppercase text-gold font-medium bg-gold/10 px-2 py-0.5 rounded border border-gold/20">
-                      {rev.source}
-                    </span>
-                  </div>
-                </Reveal>
-              );
-            })}
+            <button
+              onClick={nextReview}
+              className="p-2.5 rounded-full border border-sand hover:border-bronze text-ink-soft hover:text-bronze transition-colors shadow-sm"
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* CTA: Read All Reviews on Google Maps */}
-        <div className="mt-12 text-center">
+        {/* Google Maps link */}
+        <div className="mt-10 text-center">
           <a
             href={siteConfig.googleMapsUrl}
             target="_blank"
@@ -130,7 +111,7 @@ export const Reviews: React.FC = () => {
             id="google-maps-reviews-btn"
           >
             <span>{tCommon('viewOnGoogleMaps')}</span>
-            <ExternalLink className="w-3.5 h-3.5 text-gold" />
+            <ExternalLink className="w-3.5 h-3.5 text-bronze" />
           </a>
         </div>
       </div>

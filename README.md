@@ -1,16 +1,12 @@
-# DOSHA HOTEL ADAMA — Luxury Hotel Website
+# DOSHA HOTEL ADAMA — DESIGN V2 (Clean Bright Luxury)
 
-A production-ready, cinematic, fully responsive luxury website for **Dosha Hotel Adama**, situated in Adama (Nazret), Ethiopia, on the Wonji Mazoria to Adama Steel Factory road, in front of Dembela Secondary School.
+A boutique hotel web platform for **Dosha Hotel Adama**, situated in Adama (Nazret), Ethiopia, along the Wonji Mazoria corridor facing Dembela Secondary School.
 
-Built with Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, Lenis smooth scrolling, and full internationalization (`next-intl`) across **English (en)**, **Amharic (am)**, and **Afan Oromo (om)**.
+Redesigned according to **Design V2: Clean Bright Luxury with Unexpected Transitions**: sunlit ivory palettes, tall arch frames, 9 cycling clip-path hero animations, conversational 6-step WhatsApp booking, automatic Day/Evening mode (Africa/Addis_Ababa time), ambient lobby audio, and smooth motion across **English (en)**, **Amharic (am)**, and **Afan Oromo (om)**.
 
 ---
 
 ## 1. Quick Start
-
-### Prerequisites
-- Node.js 18.18+ or 20+ (tested with v24.17.0)
-- npm 9+ or 11+
 
 ### Installation & Development
 ```bash
@@ -31,134 +27,78 @@ npm run start
 
 ---
 
-## 2. Project Architecture & File Structure
+## 2. Configuration & Information to Provide (`src/config/site.ts`)
 
-```
-/
-├── messages/
-│   ├── en.json              # English copy & alt text
-│   ├── am.json              # Amharic (አማርኛ) copy & alt text
-│   └── om.json              # Afan Oromo copy & alt text
-├── public/
-│   ├── favicon.svg          # Original vector emblem favicon
-│   └── images/              # All 9 high-resolution photos
-├── src/
-│   ├── app/
-│   │   ├── [locale]/
-│   │   │   ├── layout.tsx   # Root locale layout with SEO & Hotel JSON-LD
-│   │   │   ├── page.tsx     # Home page
-│   │   │   └── book/
-│   │   │       └── page.tsx # Dedicated WhatsApp reservation page
-│   │   ├── globals.css      # Luxury CSS variables, grain overlay & typography
-│   │   ├── robots.ts        # Dynamic robots.txt
-│   │   └── sitemap.ts       # Multilingual sitemap.xml with hreflang alternates
-│   ├── components/
-│   │   ├── About.tsx        # Welcome section with lobby parallax
-│   │   ├── BookingForm.tsx  # WhatsApp reservation form & validation
-│   │   ├── BookingModal.tsx # Accessible reservation modal
-│   │   ├── Cursor.tsx       # Custom desktop cursor
-│   │   ├── FloatingActions.tsx # WhatsApp, Call Now, Language popover
-│   │   ├── Footer.tsx       # Footer with contacts & links
-│   │   ├── Gallery.tsx      # Masonry photo grid
-│   │   ├── Hero.tsx         # 9-slide Ken Burns loop & headline
-│   │   ├── LanguageSwitcher.tsx # Instant multilingual switcher
-│   │   ├── Lightbox.tsx     # Fullscreen photo lightbox
-│   │   ├── LoadingScreen.tsx# SVG stroke splash screen
-│   │   ├── Location.tsx     # Google Maps & contact information
-│   │   ├── Logo.tsx         # Original Dosha SVG emblem & wordmark
-│   │   ├── MagneticButton.tsx # Desktop cursor magnetic pull
-│   │   ├── Navbar.tsx       # Glass navigation with scroll hide/reveal
-│   │   ├── QuickBookingBar.tsx # Floating quick-booking card / mobile bar
-│   │   ├── Restaurant.tsx   # Culinary collage & terrace highlights
-│   │   ├── Reveal.tsx       # Viewport scroll animations
-│   │   ├── Rooms.tsx        # 4 room types & amenity badges
-│   │   └── SmoothScroll.tsx # Lenis smooth scrolling
-│   ├── config/
-│   │   └── site.ts          # SINGLE SOURCE OF TRUTH for all hotel data
-│   └── i18n/
-│       ├── request.ts       # next-intl server request config
-│       └── routing.ts       # Supported locales [en, am, om]
-├── tailwind.config.ts       # Custom luxury color palette & typography
-└── tsconfig.json
-```
+All content, telephone numbers, room rates, and bank accounts are centralized in [`src/config/site.ts`](file:///c:/Users/ps/Desktop/dosha%20hotel/src/config/site.ts).
 
----
-
-## 3. How to Edit Hotel Information (`src/config/site.ts`)
-
-All content, telephone numbers, WhatsApp numbers, room types, reviews, and payment instructions are consolidated in `src/config/site.ts`.
-
-### Changing the WhatsApp Number and Phone
-In `src/config/site.ts`:
+### 1) Phone & WhatsApp Numbers
 ```typescript
-phone: '+251 91 123 4567', // For tel: links
-whatsappNumber: '251911234567', // International format digits ONLY (no spaces or '+')
-whatsappDisplay: '+251 91 123 4567', // Display format in UI
+phone: '+251 91 123 4567', // For direct tel: links
+whatsappNumber: '251911234567', // Digits only with country code (no '+' or spaces)
+whatsappDisplay: '+251 91 123 4567', // Human-friendly display
 ```
 
-### Adding or Updating Booking.com Link
-```typescript
-bookingComUrl: 'https://www.booking.com/hotel/et/dosha-adama.html', // Set URL to show button, or '' to hide
-```
-
-### Setting Room Rates & Amenities
-In `siteConfig.rooms`:
+### 2) Room Rates
+By default, room prices are set to `'PRICE_TBD'`. To display numeric rates:
 ```typescript
 {
   id: 'standard-twin',
   nameKey: 'rooms.standardTwin.name',
   descKey: 'rooms.standardTwin.desc',
-  priceETB: '2500', // Set numeric rate or leave 'PRICE_TBD'
+  priceETB: '2500', // Change from 'PRICE_TBD' to your price
   image: '/images/dosha-hotel-adama-03-twin-room.jpg',
   amenities: ['wifi', 'tv', 'hotWater', 'breakfast'],
   capacity: 2,
 }
 ```
 
-### Updating Bank Accounts & Payment Methods
-In `siteConfig.paymentMethods`:
+### 3) Payment Account Numbers
+In `siteConfig.paymentMethods`, supply your real Telebirr, CBE, and bank account numbers:
 ```typescript
 {
   id: 'telebirr',
-  accountNumber: '0911234567',
+  accountNumber: '0911234567', // Replace TELEBIRR_ACCOUNT_HERE
+  accountName: 'Dosha Hotel Adama',
+  ...
+},
+{
+  id: 'cbe',
+  accountNumber: '1000123456789', // Replace CBE_ACCOUNT_HERE
   accountName: 'Dosha Hotel Adama',
   ...
 }
 ```
 
----
+### 4) Optional Ambient Audio File
+Place a royalty-free MP3 file at:
+```
+/public/audio/lobby-ambience.mp3
+```
+- **If the file is not present**: The audio toggle button in the navbar is automatically hidden so no broken controls are ever displayed.
+- **When present**: Visitors can toggle soft lobby ambience (starts only on user tap, fades in over 1.5s, volume 0.25, pauses on tab blur).
 
-## 4. How to Edit Translations
-
-All translated copy is organized in `/messages/`:
-- `en.json`: English
-- `am.json`: Amharic (አማርኛ)
-- `om.json`: Afan Oromo (Afaan Oromoo)
-
-To change any headline, caption, or room description, edit the corresponding keys in each JSON file. Ethiopic glyph heights are safeguarded in `globals.css` so characters never get clipped.
-
----
-
-## 5. Adding or Replacing Photos
-
-Photos live in `/public/images/`. To replace a photo, keep the file name or update the path in `src/config/site.ts`:
-1. `dosha-hotel-adama-01-exterior-building.jpg`
-2. `dosha-hotel-adama-02-lobby-reception.jpg`
-3. `dosha-hotel-adama-03-twin-room.jpg`
-4. `dosha-hotel-adama-04-room-wine-setup.jpg`
-5. `dosha-hotel-adama-05-restaurant-hall.jpg`
-6. `dosha-hotel-adama-06-terrace-evening.jpg`
-7. `dosha-hotel-adama-07-bar-lounge.jpg`
-8. `dosha-hotel-adama-08-signature-drinks.jpg`
-9. `dosha-hotel-adama-09-buffet-event-hall.jpg`
+### 5) External Booking.com Link (Optional)
+If you wish to show the "Book on Booking.com" secondary button:
+```typescript
+bookingComUrl: 'https://www.booking.com/hotel/et/dosha-hotel-adama.html', // Set URL or leave '' to hide
+```
 
 ---
 
-## 6. Deploying to Vercel
+## 3. Implemented Features & Micro-Details
 
-1. Push your repository to GitHub, GitLab, or Bitbucket.
-2. Sign in to [Vercel](https://vercel.com) and click **Add New Project**.
-3. Import your repository.
-4. Set the environment variable:
-   - `NEXT_PUBLIC_SITE_URL` = `https://your-domain.com`
-5. Click **Deploy**. Vercel will build and serve the site globally with Edge routing and static generation.
+- **Clean Bright Luxury Palette**: CSS variables `--paper` (`#FBF8F3`), `--white` (`#FFFFFF`), `--champagne` (`#EFE5D3`), `--sand` (`#D8C8AA`), `--bronze` (`#B08D57`), `--bronze-deep` (`#8A6A3B`), `--ink` (`#1C1A17`), and `--ink-soft` (`#5E574C`).
+- **Hero Arch Slideshow**: 82vh tall arch frame looping all 9 photos every 3s with the exact 9 distinct clip-path transition sequences, 1.1s cubic-bezier timing, next-image preloading, 3s filling line progress, and accessible pause control.
+- **Conversational 6-Step Booking**: One question per step (Dates, Guests, Room, Payment, Notes, Details), live summary card, sessionStorage persistence, input validation, and direct prefilled multilingual WhatsApp dispatch.
+- **Pinned Horizontal Rooms Scroll**: Cards scroll horizontally on vertical scroll on desktop; snap carousel on mobile.
+- **Automatic Day & Evening Mode**: Detects browser local time in Adama (`Africa/Addis_Ababa` UTC+3). Uses Day mode between 06:00 and 17:59, and Evening mode between 18:00 and 05:59 with a 1.2s smooth CSS variable transition. Includes a manual Auto/Day/Evening navbar toggle with localStorage memory and Anti-FOUC script.
+- **Full-Screen Circle Page Transition**: Expanding bronze-to-champagne circle mask from clicked language switcher origin.
+- **Marquee Ribbon**: Outlined-serif ribbon between sections reacting to scroll velocity.
+- **Luxury Micro-Details**:
+  - Interactive double-door swing on logo click.
+  - 5-click easter egg revealing a multilingual "Welcome home" toast.
+  - Tab title changer when inactive ("Your stay awaits · Dosha Hotel").
+  - Bronze top hairline scroll progress & back-to-top button.
+  - Custom bronze thin scrollbar and selection color.
+  - Branded 404 page with arch emblem and trilingual return button.
+  - Custom desktop cursor with trailing ring and "View" label over images.

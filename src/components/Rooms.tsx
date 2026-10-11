@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Wifi, Tv, Droplets, Coffee, Sun, ArrowRight, Users } from 'lucide-react';
 import { siteConfig, RoomType } from '@/config/site';
-import Reveal from './Reveal';
 
 interface RoomsProps {
   onSelectRoom: (roomId: string) => void;
@@ -22,72 +22,89 @@ const amenityIcons = {
 export const Rooms: React.FC<RoomsProps> = ({ onSelectRoom }) => {
   const t = useTranslations('rooms');
   const tCommon = useTranslations('common');
+  const targetRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Desktop Pinned Horizontal Scroll
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const xTransform = useTransform(scrollYProgress, [0, 1], ['0%', '-52%']);
 
   return (
     <section
       id="rooms"
-      className="relative py-24 sm:py-32 lg:py-40 bg-charcoal border-b border-graphite/40 overflow-hidden"
+      ref={targetRef}
+      className="relative bg-paper border-b border-sand/60 lg:h-[260vh]"
     >
-      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
-          <div className="max-w-2xl">
-            <Reveal>
-              <span className="eyebrow-label mb-3">{t('eyebrow')}</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-ivory tracking-tight leading-[1.2]">
+      {/* Sticky Container for Desktop Pinned Horizontal Scroll */}
+      <div className="lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden flex flex-col justify-center py-20 lg:py-0">
+        <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8 w-full mb-8 lg:mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between">
+            <div className="max-w-2xl">
+              <span className="eyebrow-label mb-2">{t('eyebrow')}</span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-ink tracking-tight leading-[1.15]">
                 {t('headline')}
               </h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.2} className="mt-4 md:mt-0">
-            <p className="text-sand/80 text-sm sm:text-base font-light max-w-md">
+            </div>
+            <p className="text-ink-soft text-sm sm:text-base font-light max-w-md mt-3 md:mt-0">
               {t('sentence')}
             </p>
-          </Reveal>
+          </div>
         </div>
 
-        {/* Desktop 3-column / 4-card grid & Mobile Horizontal Snap Carousel */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 overflow-x-auto md:overflow-visible pb-6 md:pb-0 snap-x snap-mandatory scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
-          {siteConfig.rooms.map((room: RoomType, idx) => (
-            <Reveal
-              key={room.id}
-              delay={idx * 0.1}
-              className="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-start flex-1 flex flex-col"
-            >
-              <div className="group flex flex-col h-full bg-ink/70 border border-graphite/70 rounded-sm overflow-hidden transition-all duration-500 hover:border-gold/50 hover:shadow-[0_10px_30px_rgba(201,162,75,0.15)] hover:-translate-y-1">
-                {/* Room Image with Smooth Hover Zoom */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-charcoal">
-                  <Image
-                    src={room.image}
-                    alt={t(`${room.id === 'standard-twin' ? 'standardTwin' : room.id === 'deluxe-double' ? 'deluxeDouble' : room.id === 'executive-suite' ? 'executiveSuite' : 'familyRoom'}.name` as any)}
-                    fill
-                    sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
+        {/* Desktop: Pinned Horizontally Scrolling Track / Mobile: Snap Carousel */}
+        <div className="w-full overflow-hidden px-4 sm:px-6 lg:px-8">
+          <motion.div
+            style={shouldReduceMotion ? {} : { x: xTransform }}
+            className="flex gap-6 sm:gap-8 overflow-x-auto lg:overflow-visible pb-6 lg:pb-0 snap-x snap-mandatory scrollbar-none"
+          >
+            {siteConfig.rooms.map((room: RoomType, idx) => (
+              <motion.div
+                key={room.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: idx * 0.1 }}
+                className="w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 snap-start flex flex-col luxury-card overflow-hidden"
+              >
+                {/* Room Photo with arch-shaped top corners and hover zoom */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-[20px] bg-champagne">
+                  <motion.div
+                    layoutId={`room-image-${room.id}`}
+                    className="relative w-full h-full"
+                  >
+                    <Image
+                      src={room.image}
+                      alt={t(`${room.id === 'standard-twin' ? 'standardTwin' : room.id === 'deluxe-double' ? 'deluxeDouble' : room.id === 'executive-suite' ? 'executiveSuite' : 'familyRoom'}.name` as any)}
+                      fill
+                      sizes="(max-width: 768px) 85vw, 420px"
+                      className="object-cover object-center transition-transform duration-700 ease-luxury hover:scale-105"
+                    />
+                  </motion.div>
 
-                  {/* Capacity Badge */}
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-sm bg-ink/75 backdrop-blur-md border border-graphite flex items-center gap-1.5 text-[11px] text-sand">
-                    <Users className="w-3 h-3 text-gold" />
-                    <span>{room.capacity}</span>
+                  {/* Guests badge */}
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-pill bg-white/90 backdrop-blur-md border border-sand/70 flex items-center gap-1.5 text-xs text-ink font-medium shadow-sm">
+                    <Users className="w-3.5 h-3.5 text-bronze" />
+                    <span>{room.capacity} {room.capacity === 1 ? 'Guest' : 'Guests'}</span>
                   </div>
                 </div>
 
-                {/* Content Area */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+                {/* Details */}
+                <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
                   <div>
-                    <h3 className="font-serif text-xl sm:text-2xl text-ivory font-normal mb-2 transition-colors group-hover:text-gold-light">
+                    <h3 className="font-serif text-2xl text-ink font-light mb-2">
                       {t(`${room.id === 'standard-twin' ? 'standardTwin' : room.id === 'deluxe-double' ? 'deluxeDouble' : room.id === 'executive-suite' ? 'executiveSuite' : 'familyRoom'}.name` as any)}
                     </h3>
 
-                    <p className="text-xs text-sand/70 line-clamp-2 leading-relaxed font-light mb-4">
+                    <p className="text-xs sm:text-sm text-ink-soft line-clamp-2 leading-relaxed font-light mb-5">
                       {t(`${room.id === 'standard-twin' ? 'standardTwin' : room.id === 'deluxe-double' ? 'deluxeDouble' : room.id === 'executive-suite' ? 'executiveSuite' : 'familyRoom'}.desc` as any)}
                     </p>
 
-                    {/* Amenity Icons */}
-                    <div className="flex items-center gap-3 py-3 border-y border-graphite/60 mb-5">
+                    {/* Amenities */}
+                    <div className="flex items-center gap-3.5 py-3 border-y border-sand/40 mb-6">
                       {room.amenities.map((amenityKey) => {
                         const item = amenityIcons[amenityKey];
                         if (!item) return null;
@@ -95,47 +112,47 @@ export const Rooms: React.FC<RoomsProps> = ({ onSelectRoom }) => {
                         return (
                           <div
                             key={amenityKey}
-                            className="text-sand/70 hover:text-gold transition-colors flex items-center"
+                            className="text-ink-soft hover:text-bronze transition-colors"
                             title={t(`amenities.${amenityKey}` as any)}
                           >
-                            <Icon className="w-4 h-4 text-gold/80" />
+                            <Icon className="w-4 h-4 text-bronze" />
                           </div>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* Price Line & Booking Button */}
-                  <div>
-                    <div className="mb-4">
+                  {/* Rate & Button */}
+                  <div className="flex items-center justify-between pt-2">
+                    <div>
                       {room.priceETB === 'PRICE_TBD' ? (
-                        <span className="text-xs tracking-wider uppercase text-sand/80 font-medium">
+                        <span className="text-xs uppercase tracking-wider text-ink-soft font-medium">
                           {t('priceTbd')}
                         </span>
                       ) : (
                         <div className="flex items-baseline gap-1">
-                          <span className="text-xs text-sand/70">{tCommon('from')}</span>
-                          <span className="font-serif text-lg text-gold font-light">
+                          <span className="text-xs text-ink-soft">{tCommon('from')}</span>
+                          <span className="font-serif text-xl text-bronze font-light">
                             {room.priceETB} ETB
                           </span>
-                          <span className="text-xs text-sand/70">/ {tCommon('night')}</span>
+                          <span className="text-xs text-ink-soft">/ {tCommon('night')}</span>
                         </div>
                       )}
                     </div>
 
                     <button
                       onClick={() => onSelectRoom(room.id)}
-                      className="btn-secondary w-full text-center flex items-center justify-center gap-2 !py-2.5 !min-h-[42px] text-xs group-hover:border-gold group-hover:text-gold"
+                      className="btn-bronze !min-h-[40px] !py-2 !px-4 !text-xs flex items-center gap-1.5"
                       id={`book-room-${room.id}`}
                     >
                       <span>{t('bookRoom')}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
